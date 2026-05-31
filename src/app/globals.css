@@ -1,26 +1,167 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-hairline: var(--hairline);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: oklch(0.14 0.008 20);
+  --foreground: oklch(0.96 0.006 60);
+  --surface: oklch(0.11 0.008 20);
+  --surface-elevated: oklch(0.19 0.012 20);
+  --card: oklch(0.16 0.01 20);
+  --card-foreground: oklch(0.96 0.006 60);
+  --popover: oklch(0.14 0.008 20);
+  --popover-foreground: oklch(0.96 0.006 60);
+  --primary: oklch(0.96 0.006 60);
+  --primary-foreground: oklch(0.1 0.008 20);
+  --secondary: oklch(0.19 0.012 20);
+  --secondary-foreground: oklch(0.96 0.006 60);
+  --muted: oklch(0.19 0.012 20);
+  --muted-foreground: oklch(0.66 0.015 25);
+  --accent: oklch(0.78 0.045 20);
+  --accent-foreground: oklch(0.12 0.008 20);
+  --destructive: oklch(0.58 0.16 20);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.3 0.012 20 / 0.7);
+  --hairline: oklch(1 0 0 / 0.07);
+  --input: oklch(0.22 0.012 20);
+  --ring: oklch(0.78 0.045 20);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-hairline);
+  }
+
+  html,
+  body {
+    min-height: 100%;
+    overflow-x: hidden;
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings:
+      "ss01",
+      "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body[data-scroll-locked] {
+    margin-right: 0 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family:
+      "Cormorant Garamond", "Times New Roman", ui-serif, Georgia, serif;
+    font-weight: 300;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-foreground);
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--color-background) inset;
+    -webkit-text-fill-color: var(--color-foreground);
+    caret-color: var(--color-foreground);
+    transition: background-color 9999s ease-in-out 0s;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .font-display {
+    font-family:
+      "Cormorant Garamond", "Times New Roman", ui-serif, Georgia, serif;
+  }
+
+  .tracking-wordmark {
+    letter-spacing: 0.42em;
+  }
+
+  .tracking-eyebrow {
+    letter-spacing: 0.32em;
+  }
+
+  .hairline {
+    border-color: var(--color-hairline);
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 400ms ease;
+  }
+
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .reveal {
+    animation: reveal 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+* {
+  scrollbar-color: var(--color-accent) var(--color-surface);
+  scrollbar-width: thin;
 }
