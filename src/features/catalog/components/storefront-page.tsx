@@ -31,8 +31,7 @@ export function StorefrontPage({ pieces }: StorefrontPageProps) {
             Onesbryne
           </h1>
           <p className="mt-10 max-w-md text-sm leading-relaxed text-foreground/85 md:text-base">
-            A private catalog of selected pieces. Each item lives once, held,
-            worn, and passed on.
+            A private catalog of selected pieces.
           </p>
           <Link
             className="mt-12 inline-block border-b border-foreground pb-1 text-[11px] tracking-eyebrow uppercase transition-colors hover:border-accent hover:text-accent"
@@ -80,9 +79,8 @@ export function StorefrontPage({ pieces }: StorefrontPageProps) {
       <section className="border-t border-hairline">
         <div className="mx-auto max-w-3xl px-4 py-32 text-center md:px-6 lg:px-10">
           <p className="font-display text-2xl leading-relaxed md:text-3xl">
-            Every piece here was chosen, not produced, not stocked, not
-            multiplied. If something speaks to you, write. The transaction is
-            human, the way it should be.
+            Every piece here was chosen, not produced, not stocked. If something
+            speaks to you, contact us.
           </p>
         </div>
       </section>

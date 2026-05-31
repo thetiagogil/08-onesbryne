@@ -34,7 +34,7 @@ export function ProfileSettingsForm({ currentUser }: ProfileSettingsFormProps) {
         </div>
       ) : null}
 
-      <FormField htmlFor="displayName" label="Display name" required>
+      <FormField htmlFor="displayName" label="Name" required>
         <Input
           defaultValue={currentUser.profile.displayName ?? ""}
           id="displayName"

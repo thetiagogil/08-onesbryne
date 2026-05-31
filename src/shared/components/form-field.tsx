@@ -18,7 +18,7 @@ export function FormField({
   required = false,
 }: FormFieldProps) {
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn("flex flex-col gap-2", className)}>
       <label
         className="block text-[11px] tracking-eyebrow text-muted-foreground uppercase"
         htmlFor={htmlFor}

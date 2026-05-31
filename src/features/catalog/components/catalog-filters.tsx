@@ -79,18 +79,20 @@ export function CatalogFilters({
               options={catalogSortOptions}
             />
           </FormField>
-          <label className="min-w-56 flex-1 space-y-1 sm:max-w-xs">
-            <span className="block text-[10px] tracking-eyebrow text-muted-foreground uppercase">
-              Search
-            </span>
+          <FormField
+            className="min-w-56 flex-1 sm:max-w-xs"
+            htmlFor="q"
+            label="Search"
+          >
             <Input
               defaultValue={query}
+              id="q"
               name="q"
               placeholder="Name, brand, or code"
               type="search"
             />
-          </label>
-          <Button size="sm" type="submit" variant="outline">
+          </FormField>
+          <Button type="submit" variant="outline">
             <Search />
             Apply
           </Button>

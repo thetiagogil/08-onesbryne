@@ -18,13 +18,13 @@ export default async function AboutPage() {
 
         <div className="mt-16 space-y-8 text-base leading-relaxed text-muted-foreground">
           <p>
-            ONESBRYNE is a curated resale catalog of selected clothing pieces:
-            coats kept for too long, dresses worn once, knitwear loved and
-            outgrown. Each item is chosen, considered, and listed only when it
-            is ready to find a new home.
+            Onesbryne is a private catalog of selected pieces. It is a place to
+            discover and acquire unique items that speak to you. Each piece is
+            chosen for its quality, story, and connection to the world around
+            us.
           </p>
           <p>
-            There is no checkout here. If a piece speaks to you, write an email.
+            There is no checkout here. If something speaks to you, contact us.
           </p>
         </div>
 
