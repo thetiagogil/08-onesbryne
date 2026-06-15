@@ -1,5 +1,5 @@
-import { AuthField } from "@/features/auth/components/auth-field";
 import { minimumPasswordLength } from "@/features/auth/lib/auth-validation";
+import { FormField } from "@/shared/components/form-field";
 import { Input } from "@/shared/components/ui/input";
 
 type AuthFormFieldsProps = {
@@ -30,7 +30,7 @@ export function AuthFormFields({
   return (
     <>
       {isSignup ? (
-        <AuthField htmlFor="displayName" label="Name">
+        <FormField htmlFor="displayName" label="Name" required>
           <Input
             autoComplete="name"
             disabled={pending}
@@ -41,10 +41,10 @@ export function AuthFormFields({
             type="text"
             value={displayName}
           />
-        </AuthField>
+        </FormField>
       ) : null}
 
-      <AuthField htmlFor="email" label="Email">
+      <FormField htmlFor="email" label="Email" required>
         <Input
           autoComplete="email"
           disabled={pending}
@@ -54,9 +54,9 @@ export function AuthFormFields({
           type="email"
           value={email}
         />
-      </AuthField>
+      </FormField>
 
-      <AuthField htmlFor="password" label="Password">
+      <FormField htmlFor="password" label="Password" required>
         <Input
           autoComplete={isSignup ? "new-password" : "current-password"}
           disabled={pending}
@@ -67,10 +67,10 @@ export function AuthFormFields({
           type="password"
           value={password}
         />
-      </AuthField>
+      </FormField>
 
       {isSignup ? (
-        <AuthField htmlFor="confirmPassword" label="Confirm password">
+        <FormField htmlFor="confirmPassword" label="Confirm password" required>
           <Input
             autoComplete="new-password"
             disabled={pending}
@@ -81,7 +81,7 @@ export function AuthFormFields({
             type="password"
             value={confirmPassword}
           />
-        </AuthField>
+        </FormField>
       ) : null}
     </>
   );

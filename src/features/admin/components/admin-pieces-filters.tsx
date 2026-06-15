@@ -1,5 +1,6 @@
 "use client";
 
+import { X } from "lucide-react";
 import type { ChangeEvent } from "react";
 
 import {
@@ -137,6 +138,7 @@ export function AdminPiecesFilters({
           type="button"
           variant="outline"
         >
+          <X />
           Clear
         </Button>
       </div>

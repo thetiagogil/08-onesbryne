@@ -2,7 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { formatPrice } from "@/features/catalog/lib/format";
-import { formatPieceSize } from "@/shared/constants/piece-attributes";
+import { Badge } from "@/shared/components/ui/badge";
+import { ImagePlaceholder } from "@/shared/components/image-placeholder";
+import {
+  formatPieceSize,
+  formatPieceStatus,
+} from "@/shared/constants/piece-attributes";
 import type { Piece } from "@/shared/types";
 
 type ProductCardProps = {
@@ -32,10 +37,13 @@ export function ProductCard({
             src={primaryImage.publicUrl}
           />
         ) : (
-          <div className="flex h-full items-center justify-center px-6 text-center text-[11px] tracking-eyebrow text-muted-foreground uppercase">
-            Image pending
-          </div>
+          <ImagePlaceholder />
         )}
+        {piece.status !== "available" ? (
+          <Badge className="absolute top-3 left-3" tone="accent">
+            {formatPieceStatus(piece.status)}
+          </Badge>
+        ) : null}
       </div>
       <div className="mt-4 flex items-start justify-between gap-3">
         <div className="min-w-0">

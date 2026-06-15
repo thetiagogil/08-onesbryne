@@ -90,7 +90,7 @@ export function Select({
       <SelectPrimitive.Trigger
         aria-required={required}
         className={cn(
-          "flex h-11 w-full items-center justify-between gap-3 border-b border-hairline bg-transparent py-2 pr-1 text-left text-sm text-foreground outline-none transition-colors focus:border-accent focus-visible:border-accent disabled:pointer-events-none disabled:opacity-50 data-[placeholder]:text-muted-foreground/60",
+          "focus-soft flex h-11 w-full items-center justify-between gap-3 border-b border-hairline bg-transparent py-2 pr-1 text-left text-sm text-foreground disabled:pointer-events-none disabled:opacity-50 data-[placeholder]:text-muted-foreground/60",
           className,
         )}
         id={id}

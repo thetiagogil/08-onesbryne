@@ -10,7 +10,9 @@ import {
 } from "@/features/admin/lib/piece-form-size-options";
 import { pieceStatusOptions } from "@/features/admin/lib/piece-form-options";
 import { PieceFormSubmitButton } from "@/features/admin/components/piece-form-submit-button";
+import { usePieceImagePreview } from "@/features/admin/hooks/use-piece-image-preview";
 import { usePieceForm } from "@/features/admin/hooks/use-piece-form";
+import { FormFeedback } from "@/shared/components/form-feedback";
 import { FormField } from "@/shared/components/form-field";
 import { Input } from "@/shared/components/ui/input";
 import { Select } from "@/shared/components/ui/select";
@@ -36,6 +38,7 @@ export function PieceForm({
   piece,
 }: PieceFormProps) {
   const form = usePieceForm({ piece });
+  const imagePreview = usePieceImagePreview();
   const categoryOptions = categories.map((category) => ({
     label: category.label,
     value: category.slug,
@@ -83,14 +86,10 @@ export function PieceForm({
       onSubmit={form.handleCreateSubmit}
     >
       {form.error ? (
-        <div className="border border-destructive/40 px-4 py-3 text-sm text-destructive">
-          {form.error}
-        </div>
+        <FormFeedback tone="error">{form.error}</FormFeedback>
       ) : null}
       {form.state?.ok && form.state.message ? (
-        <div className="border border-accent/40 px-4 py-3 text-sm text-accent">
-          {form.state.message}
-        </div>
+        <FormFeedback tone="success">{form.state.message}</FormFeedback>
       ) : null}
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -179,9 +178,30 @@ export function PieceForm({
             accept={ACCEPTED_PIECE_IMAGE_MIME_TYPES.join(",")}
             id={PIECE_IMAGE_FILE_FIELD}
             name={PIECE_IMAGE_FILE_FIELD}
+            onChange={imagePreview.handleImageChange}
             required
             type="file"
           />
+          {imagePreview.preview ? (
+            <div className="grid gap-4 border border-hairline p-3 sm:grid-cols-[8rem_1fr] sm:items-center">
+              <div
+                aria-label={`Preview of ${imagePreview.preview.name}`}
+                className="aspect-[4/5] bg-cover bg-center"
+                role="img"
+                style={{
+                  backgroundImage: `url(${imagePreview.preview.url})`,
+                }}
+              />
+              <div>
+                <p className="text-sm text-foreground">
+                  {imagePreview.preview.name}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {imagePreview.preview.sizeLabel} before app compression.
+                </p>
+              </div>
+            </div>
+          ) : null}
           <p className="text-xs text-muted-foreground">
             Add the first JPEG or WebP image. It will be resized and compressed
             before the piece is created.

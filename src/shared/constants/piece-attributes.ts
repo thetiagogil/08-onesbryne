@@ -1,4 +1,4 @@
-import type { PieceCondition, PieceSize } from "@/shared/types";
+import type { PieceCondition, PieceSize, PieceStatus } from "@/shared/types";
 
 export const pieceSizeOptions: { label: string; value: PieceSize }[] = [
   { label: "XXS", value: "xxs" },
@@ -42,6 +42,14 @@ export const pieceConditionOptions: {
   { label: "Visible wear", value: "visible_wear" },
 ];
 
+export const pieceStatusLabels: Record<PieceStatus, string> = {
+  archived: "Archived",
+  available: "Available",
+  draft: "Draft",
+  reserved: "Reserved",
+  sold: "Sold",
+};
+
 export function formatPieceSize(value: PieceSize) {
   return (
     pieceSizeOptions.find((option) => option.value === value)?.label ?? value
@@ -53,6 +61,10 @@ export function formatPieceCondition(value: PieceCondition) {
     pieceConditionOptions.find((option) => option.value === value)?.label ??
     value
   );
+}
+
+export function formatPieceStatus(value: PieceStatus) {
+  return pieceStatusLabels[value];
 }
 
 export function sortPieceSizes(values: PieceSize[]) {

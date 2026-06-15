@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ExternalLink } from "lucide-react";
 
 import { AdminImageManager } from "@/features/admin/components/admin-image-manager";
 import { PieceForm } from "@/features/admin/components/piece-form";
@@ -9,7 +10,7 @@ import {
   getCategorySizeOptions,
 } from "@/features/catalog/server/queries";
 import { Button } from "@/shared/components/ui/button";
-import { EyebrowLink } from "@/shared/components/ui/eyebrow-link";
+import { PageHeader } from "@/shared/components/page-header";
 import { requireAdmin } from "@/shared/server/auth";
 
 export const dynamic = "force-dynamic";
@@ -31,16 +32,21 @@ export default async function EditPiecePage({ params }: EditPiecePageProps) {
 
   return (
     <section className="mx-auto max-w-4xl px-6 py-16 lg:px-10">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <EyebrowLink href="/admin/pieces">Back to pieces</EyebrowLink>
-        <Button asChild size="sm" variant="outline">
-          <Link href={`/pieces/${piece.code}`}>View public page</Link>
-        </Button>
-      </div>
-
-      <div className="mt-8 border-b border-hairline pb-6">
-        <h1 className="font-display text-4xl">{piece.code}</h1>
-      </div>
+      <PageHeader
+        actions={
+          <Button asChild size="sm" variant="outline">
+            <Link href={`/pieces/${piece.code}`}>
+              <ExternalLink />
+              View public page
+            </Link>
+          </Button>
+        }
+        backHref="/admin/pieces"
+        backLabel="Back to pieces"
+        description={piece.name}
+        size="compact"
+        title={piece.code}
+      />
 
       <div className="mt-10 space-y-10">
         <PieceForm

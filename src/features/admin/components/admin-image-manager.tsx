@@ -5,6 +5,7 @@ import { Loader2, Upload } from "lucide-react";
 import { AdminPieceImageCard } from "@/features/admin/components/admin-piece-image-card";
 import { useAdminImageManager } from "@/features/admin/hooks/use-admin-image-manager";
 import { ACCEPTED_PIECE_IMAGE_MIME_TYPES } from "@/shared/constants/app";
+import { FormFeedback } from "@/shared/components/form-feedback";
 import { Button } from "@/shared/components/ui/button";
 import type { PieceImage } from "@/shared/types";
 
@@ -59,9 +60,7 @@ export function AdminImageManager({
       </div>
 
       {state.error ? (
-        <div className="border border-destructive/40 px-4 py-3 text-sm text-destructive">
-          {state.error}
-        </div>
+        <FormFeedback tone="error">{state.error}</FormFeedback>
       ) : null}
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">

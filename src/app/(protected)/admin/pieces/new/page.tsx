@@ -3,7 +3,7 @@ import {
   getActiveCategories,
   getCategorySizeOptions,
 } from "@/features/catalog/server/queries";
-import { EyebrowLink } from "@/shared/components/ui/eyebrow-link";
+import { PageHeader } from "@/shared/components/page-header";
 import { requireAdmin } from "@/shared/server/auth";
 
 export const dynamic = "force-dynamic";
@@ -17,10 +17,13 @@ export default async function NewPiecePage() {
 
   return (
     <section className="mx-auto max-w-4xl px-6 py-16 lg:px-10">
-      <EyebrowLink href="/admin/pieces">Back to pieces</EyebrowLink>
-      <div className="mt-8 border-b border-hairline pb-6">
-        <h1 className="font-display text-4xl">Create catalog entry</h1>
-      </div>
+      <PageHeader
+        backHref="/admin/pieces"
+        backLabel="Back to pieces"
+        description="Add the product details and the first compressed image before creating the piece."
+        size="compact"
+        title="Create catalog entry"
+      />
       <div className="mt-10">
         <PieceForm
           categories={categories}

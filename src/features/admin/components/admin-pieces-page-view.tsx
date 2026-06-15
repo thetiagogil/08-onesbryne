@@ -20,6 +20,8 @@ import {
 } from "@/features/admin/lib/admin-piece-filters";
 import { getPieceStatusCounts } from "@/features/admin/lib/piece-status-counts";
 import { formatCategoryLabel, formatPrice } from "@/features/catalog/lib/format";
+import { EmptyState } from "@/shared/components/empty-state";
+import { PageHeader } from "@/shared/components/page-header";
 import { Button } from "@/shared/components/ui/button";
 import { formatPieceSize } from "@/shared/constants/piece-attributes";
 import type { Category, Piece } from "@/shared/types";
@@ -81,17 +83,18 @@ export function AdminPiecesPageView({
 
   return (
     <section className="mx-auto max-w-400 px-4 py-16 md:px-6 lg:px-10">
-      <div className="flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <h1 className="font-display text-4xl md:text-6xl">The atelier</h1>
-        </div>
-        <Button asChild>
-          <Link href="/admin/pieces/new">
-            <Plus />
-            New piece
-          </Link>
-        </Button>
-      </div>
+      <PageHeader
+        actions={
+          <Button asChild>
+            <Link href="/admin/pieces/new">
+              <Plus />
+              New piece
+            </Link>
+          </Button>
+        }
+        description="Manage catalog entries, availability, pricing, and images."
+        title="The atelier"
+      />
 
       <div className="mt-12 grid gap-px border border-hairline bg-hairline sm:grid-cols-4">
         <AdminStat label="Available" value={counts.available} />
@@ -192,10 +195,23 @@ export function AdminPiecesPageView({
             ) : (
               <tr>
                 <td
-                  className="px-6 py-16 text-center text-sm text-muted-foreground"
+                  className="px-6 py-8"
                   colSpan={8}
                 >
-                  {hasFilters ? "No pieces match those filters." : "No pieces yet."}
+                  <EmptyState
+                    actionHref={hasFilters ? undefined : "/admin/pieces/new"}
+                    actionLabel={hasFilters ? undefined : "Create piece"}
+                    description={
+                      hasFilters
+                        ? "Adjust the local filters or clear them to see the full inventory."
+                        : "Create the first catalog entry with a compressed image."
+                    }
+                    title={
+                      hasFilters
+                        ? "No pieces match those filters."
+                        : "No pieces yet."
+                    }
+                  />
                 </td>
               </tr>
             )}

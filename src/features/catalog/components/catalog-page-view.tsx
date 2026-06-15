@@ -2,6 +2,7 @@ import { CatalogFilters } from "@/features/catalog/components/catalog-filters";
 import { ProductCard } from "@/features/catalog/components/product-card";
 import type { CatalogSort } from "@/features/catalog/server/queries";
 import { EmptyState } from "@/shared/components/empty-state";
+import { PageHeader } from "@/shared/components/page-header";
 import type { Category, Piece, PieceSize } from "@/shared/types";
 
 type CatalogPageViewProps = {
@@ -23,13 +24,24 @@ export function CatalogPageView({
   sort,
   sizes,
 }: CatalogPageViewProps) {
+  const filtersKey = [
+    currentCategory ?? "",
+    currentSize ?? "",
+    query ?? "",
+    sort,
+  ].join(":");
+
   return (
     <>
       <section className="mx-auto w-full max-w-400 px-4 pt-16 pb-8 md:px-6 lg:px-10">
-        <h1 className="font-display text-4xl md:text-6xl">All pieces</h1>
+        <PageHeader
+          description="Browse the available one-of-one pieces. Filters stay in the URL, so every view can be shared."
+          title="All pieces"
+        />
       </section>
 
       <CatalogFilters
+        key={filtersKey}
         categories={categories}
         currentCategory={currentCategory}
         currentSize={currentSize}

@@ -1,4 +1,5 @@
 import { Badge } from "@/shared/components/ui/badge";
+import { formatPieceStatus } from "@/shared/constants/piece-attributes";
 import type { PieceStatus } from "@/shared/types";
 
 type AdminPieceStatusBadgeProps = {
@@ -8,10 +9,9 @@ type AdminPieceStatusBadgeProps = {
 export function AdminPieceStatusBadge({
   status,
 }: AdminPieceStatusBadgeProps) {
-  if (status === "available") return <Badge tone="accent">Available</Badge>;
-  if (status === "draft") return <Badge>Draft</Badge>;
-  if (status === "sold") return <Badge>Sold</Badge>;
-  if (status === "reserved") return <Badge tone="accent">Reserved</Badge>;
+  if (status === "available" || status === "reserved") {
+    return <Badge tone="accent">{formatPieceStatus(status)}</Badge>;
+  }
 
-  return <Badge>Archived</Badge>;
+  return <Badge>{formatPieceStatus(status)}</Badge>;
 }

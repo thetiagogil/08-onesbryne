@@ -6,11 +6,13 @@ import {
 } from "@/features/catalog/lib/format";
 import { FavouriteButton } from "@/features/favourites/components/favourite-button";
 import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
 import { EyebrowLink } from "@/shared/components/ui/eyebrow-link";
 import { SELLER_EMAIL } from "@/shared/constants/app";
 import {
   formatPieceCondition,
   formatPieceSize,
+  formatPieceStatus,
 } from "@/shared/constants/piece-attributes";
 import type { Piece } from "@/shared/types";
 
@@ -44,18 +46,21 @@ export function ProductDetailView({
   )}&body=${encodeURIComponent(body)}`;
 
   return (
-    <section className="mx-auto max-w-400 px-6 pt-10 pb-24 lg:px-10">
-      <EyebrowLink href="/catalog">
-        Back to catalog
-      </EyebrowLink>
+    <section className="mx-auto max-w-400 px-4 pt-8 pb-24 md:px-6 lg:px-10">
+      <EyebrowLink href="/catalog">Back to catalog</EyebrowLink>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
         <ProductGallery images={piece.images} pieceName={piece.name} />
 
         <div className="self-start lg:sticky lg:top-24">
-          <p className="text-[11px] tracking-eyebrow text-muted-foreground uppercase">
-            {piece.code}
-          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-[11px] tracking-eyebrow text-muted-foreground uppercase">
+              {piece.code}
+            </p>
+            {piece.status !== "available" ? (
+              <Badge tone="accent">{formatPieceStatus(piece.status)}</Badge>
+            ) : null}
+          </div>
           <h1 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
             {piece.name}
           </h1>
@@ -67,9 +72,6 @@ export function ProductDetailView({
             <p className="font-display text-3xl">
               {formatPrice(piece.priceCents)}
             </p>
-            {piece.status !== "available" ? (
-              <Badge tone="accent">{piece.status}</Badge>
-            ) : null}
           </div>
 
           <dl className="mt-10 divide-y divide-hairline border-y border-hairline text-sm">
@@ -88,7 +90,10 @@ export function ProductDetailView({
               />
             ) : null}
             <ProductDetailRow label="Reference" value={piece.code} />
-            <ProductDetailRow label="Status" value={piece.status} />
+            <ProductDetailRow
+              label="Status"
+              value={formatPieceStatus(piece.status)}
+            />
           </dl>
 
           <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
@@ -97,12 +102,9 @@ export function ProductDetailView({
 
           <div className="mt-10 flex flex-col gap-3">
             {piece.status === "available" ? (
-              <a
-                className="inline-flex h-12 items-center justify-center border border-foreground bg-foreground px-6 text-[11px] tracking-eyebrow text-background uppercase transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
-                href={mailto}
-              >
-                Inquire by email
-              </a>
+              <Button asChild size="lg">
+                <a href={mailto}>Inquire by email</a>
+              </Button>
             ) : (
               <div className="border border-hairline px-6 py-4 text-center text-[11px] tracking-eyebrow text-muted-foreground uppercase">
                 This piece is no longer available

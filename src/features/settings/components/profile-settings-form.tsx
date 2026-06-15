@@ -7,6 +7,7 @@ import {
   updateProfileSettingsAction,
   type ProfileSettingsState,
 } from "@/features/settings/server/actions";
+import { FormFeedback } from "@/shared/components/form-feedback";
 import { FormField } from "@/shared/components/form-field";
 import { Input } from "@/shared/components/ui/input";
 import type { CurrentUser } from "@/shared/types";
@@ -24,14 +25,10 @@ export function ProfileSettingsForm({ currentUser }: ProfileSettingsFormProps) {
   return (
     <form action={formAction} className="mt-6 space-y-6">
       {state && !state.ok ? (
-        <div className="border border-destructive/40 px-4 py-3 text-sm text-destructive">
-          {state.error}
-        </div>
+        <FormFeedback tone="error">{state.error}</FormFeedback>
       ) : null}
       {state?.ok && state.message ? (
-        <div className="border border-accent/40 px-4 py-3 text-sm text-accent">
-          {state.message}
-        </div>
+        <FormFeedback tone="success">{state.message}</FormFeedback>
       ) : null}
 
       <FormField htmlFor="displayName" label="Name" required>

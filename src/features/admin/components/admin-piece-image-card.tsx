@@ -16,7 +16,7 @@ export function AdminPieceImageCard({
   onDelete,
 }: AdminPieceImageCardProps) {
   return (
-    <div className="group relative aspect-square bg-surface">
+    <div className="group relative aspect-square overflow-hidden bg-surface">
       <Image
         alt={image.altText ?? ""}
         className="h-full w-full object-cover"
@@ -26,7 +26,7 @@ export function AdminPieceImageCard({
       />
       <Button
         aria-label="Delete image"
-        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100"
+        className="absolute top-2 right-2 opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
         disabled={deleteDisabled}
         onClick={() => onDelete(image)}
         size="icon"

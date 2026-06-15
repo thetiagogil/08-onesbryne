@@ -26,6 +26,7 @@ export function FavouriteButton({
     return (
       <Button asChild variant="outline">
         <Link href={`/auth?next=${encodeURIComponent(returnPath)}`}>
+          <Heart />
           Log in to save
         </Link>
       </Button>
@@ -34,6 +35,7 @@ export function FavouriteButton({
 
   return (
     <Button
+      aria-pressed={isFavourite}
       disabled={pending}
       onClick={() => {
         startTransition(async () => {
@@ -47,7 +49,11 @@ export function FavouriteButton({
       ) : (
         <Heart className={isFavourite ? "fill-accent text-accent" : ""} />
       )}
-      {isFavourite ? "Saved" : "Save to favourites"}
+      {pending
+        ? "Updating favourites"
+        : isFavourite
+          ? "Saved to favourites"
+          : "Save to favourites"}
     </Button>
   );
 }

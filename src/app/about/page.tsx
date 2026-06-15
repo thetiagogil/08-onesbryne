@@ -1,4 +1,6 @@
 import { SiteShell } from "@/shared/components/layout/site-shell";
+import { PageHeader } from "@/shared/components/page-header";
+import { Button } from "@/shared/components/ui/button";
 import { SELLER_EMAIL } from "@/shared/constants/app";
 import { getCurrentUser } from "@/shared/server/auth";
 
@@ -10,11 +12,16 @@ export default async function AboutPage() {
   return (
     <SiteShell currentUser={currentUser}>
       <section className="mx-auto max-w-3xl px-6 py-24">
-        <h1 className="font-display text-5xl leading-[0.95] md:text-7xl">
-          A private
-          <br />
-          catalog.
-        </h1>
+        <PageHeader
+          description="Selected fashion resale pieces, edited slowly and handled personally."
+          title={
+            <>
+              A private
+              <br />
+              catalog.
+            </>
+          }
+        />
 
         <div className="mt-16 space-y-8 text-base leading-relaxed text-muted-foreground">
           <p>
@@ -29,12 +36,9 @@ export default async function AboutPage() {
         </div>
 
         <div className="mt-16 border-t border-hairline pt-12">
-          <a
-            className="inline-block font-display text-2xl link-underline"
-            href={`mailto:${SELLER_EMAIL}`}
-          >
-            {SELLER_EMAIL}
-          </a>
+          <Button asChild variant="outline">
+            <a href={`mailto:${SELLER_EMAIL}`}>{SELLER_EMAIL}</a>
+          </Button>
         </div>
       </section>
     </SiteShell>

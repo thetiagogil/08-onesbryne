@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ProductCard } from "@/features/catalog/components/product-card";
+import { EmptyState } from "@/shared/components/empty-state";
+import { SectionHeader } from "@/shared/components/section-header";
+import { Button } from "@/shared/components/ui/button";
 import { EyebrowLink } from "@/shared/components/ui/eyebrow-link";
 import type { Piece } from "@/shared/types";
 
@@ -33,29 +36,24 @@ export function StorefrontPage({ pieces }: StorefrontPageProps) {
           <p className="mt-10 max-w-md text-sm leading-relaxed text-foreground/85 md:text-base">
             A private catalog of selected pieces.
           </p>
-          <Link
-            className="mt-12 inline-block border-b border-foreground pb-1 text-[11px] tracking-eyebrow uppercase transition-colors hover:border-accent hover:text-accent"
-            href="/catalog"
-          >
-            Enter the Catalog
-          </Link>
+          <Button asChild className="mt-12" variant="outline">
+            <Link href="/catalog">Enter the catalog</Link>
+          </Button>
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-400 px-4 py-24 md:px-6 lg:px-10">
-        <div className="mb-12 flex items-end justify-between border-b border-hairline pb-4">
-          <div>
-            <h2 className="font-display text-3xl md:text-5xl">
-              The latest pieces
-            </h2>
-          </div>
-          <EyebrowLink className="hidden md:block" href="/catalog">
-            View all
-          </EyebrowLink>
-        </div>
+        <SectionHeader
+          action={
+            <EyebrowLink className="hidden md:block" href="/catalog">
+              View all
+            </EyebrowLink>
+          }
+          title="The latest pieces"
+        />
 
         {pieces.length ? (
-          <div className="grid grid-cols-2 gap-x-3 gap-y-12 md:gap-x-4 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-x-3 gap-y-12 md:gap-x-4 lg:grid-cols-4">
             {pieces.map((piece, index) => (
               <ProductCard
                 key={piece.id}
@@ -66,13 +64,11 @@ export function StorefrontPage({ pieces }: StorefrontPageProps) {
             ))}
           </div>
         ) : (
-          <div className="border border-hairline px-6 py-20 text-center">
-            <h2 className="font-display text-3xl">No available pieces yet</h2>
-            <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
-              The catalog is connected, but there are no available pieces to
-              show.
-            </p>
-          </div>
+          <EmptyState
+            className="mt-12"
+            description="The catalog is connected, but there are no available pieces to show."
+            title="No available pieces yet"
+          />
         )}
       </section>
 

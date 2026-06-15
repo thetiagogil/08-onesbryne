@@ -1,7 +1,8 @@
 import { Heart, ShieldCheck } from "lucide-react";
-import Link from "next/link";
 
+import { ActionLink } from "@/shared/components/action-link";
 import { AccountStat } from "@/features/settings/components/account-stat";
+import { PageHeader } from "@/shared/components/page-header";
 import { ProfileEditor } from "@/features/settings/components/profile-editor";
 import { SignOutButton } from "@/shared/components/sign-out-button";
 import type { CurrentUser } from "@/shared/types";
@@ -17,10 +18,10 @@ export function AccountPageView({
 }: AccountPageViewProps) {
   return (
     <section className="mx-auto max-w-2xl px-6 py-24">
-      <h1 className="font-display text-4xl">
-        {currentUser.profile.displayName ?? "Onesbryne customer"}
-      </h1>
-      <p className="mt-2 text-sm text-muted-foreground">{currentUser.email}</p>
+      <PageHeader
+        description={currentUser.email}
+        title={currentUser.profile.displayName ?? "Onesbryne customer"}
+      />
 
       <div className="mt-12 border border-hairline">
         <AccountStat label="Favourites" value={favouriteCount} />
@@ -28,21 +29,19 @@ export function AccountPageView({
 
       <div className="mt-12 space-y-4">
         <ProfileEditor currentUser={currentUser} />
-        <Link
-          className="flex items-center gap-2 border border-hairline px-6 py-4 text-[11px] tracking-eyebrow uppercase transition-colors hover:border-accent"
+        <ActionLink
           href="/favourites"
+          icon={<Heart />}
         >
-          <Heart className="size-3.5" />
           View favourites
-        </Link>
+        </ActionLink>
         {currentUser.profile.appRole === "admin" ? (
-          <Link
-            className="flex items-center gap-2 border border-hairline px-6 py-4 text-[11px] tracking-eyebrow uppercase transition-colors hover:border-accent"
+          <ActionLink
             href="/admin"
+            icon={<ShieldCheck />}
           >
-            <ShieldCheck className="size-3.5" />
             Open admin
-          </Link>
+          </ActionLink>
         ) : null}
         <SignOutButton className="w-full border border-hairline px-6 py-4 text-left hover:border-destructive hover:text-destructive" />
       </div>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
+import { ImagePlaceholder } from "@/shared/components/image-placeholder";
 import type { PieceImage } from "@/shared/types";
 import { cn } from "@/shared/utils/cn";
 
@@ -28,20 +29,26 @@ export function ProductGallery({ images, pieceName }: ProductGalleryProps) {
             src={activeImage.publicUrl}
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-[11px] tracking-eyebrow text-muted-foreground uppercase">
-            Image pending
-          </div>
+          <ImagePlaceholder />
         )}
+        {images.length > 1 ? (
+          <div className="absolute right-3 bottom-3 bg-background/85 px-3 py-1 text-[10px] tracking-eyebrow text-muted-foreground uppercase backdrop-blur-sm">
+            {activeIndex + 1} / {images.length}
+          </div>
+        ) : null}
       </div>
 
       {images.length > 1 ? (
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-5 gap-2 md:grid-cols-6">
           {images.map((image, index) => (
             <button
+              aria-current={index === activeIndex}
               aria-label={`Show image ${index + 1}`}
               className={cn(
-                "relative aspect-square overflow-hidden border bg-surface",
-                index === activeIndex ? "border-accent" : "border-transparent",
+                "relative aspect-square overflow-hidden border bg-surface transition-colors focus-soft",
+                index === activeIndex
+                  ? "border-accent"
+                  : "border-hairline hover:border-muted-foreground",
               )}
               key={image.id}
               onClick={() => setActiveIndex(index)}

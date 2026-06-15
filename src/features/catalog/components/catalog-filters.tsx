@@ -1,6 +1,14 @@
-import { Search } from "lucide-react";
+"use client";
+
+import { Search, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
 
 import { CategoryFilterLink } from "@/features/catalog/components/category-filter-link";
+import {
+  buildCatalogHref,
+  normalizeCatalogSort,
+} from "@/features/catalog/lib/catalog-routing";
 import { catalogSortOptions } from "@/features/catalog/lib/catalog-sort-options";
 import type { CatalogSort } from "@/features/catalog/server/queries";
 import { FormField } from "@/shared/components/form-field";
@@ -27,6 +35,10 @@ export function CatalogFilters({
   sort,
   sizes,
 }: CatalogFiltersProps) {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+  const [searchValue, setSearchValue] = useState(query ?? "");
+  const hasFilters = Boolean(currentCategory || currentSize || query || sort !== "newest");
   const sizeOptions = [
     { label: "All", value: "" },
     ...sizes.map((size) => ({
@@ -34,6 +46,53 @@ export function CatalogFilters({
       value: size,
     })),
   ];
+
+  useEffect(() => {
+    const nextQuery = searchValue.trim() || undefined;
+
+    if ((query ?? "") === (nextQuery ?? "")) return;
+
+    const timeout = window.setTimeout(() => {
+      startTransition(() => {
+        router.replace(
+          buildCatalogHref({
+            category: currentCategory,
+            query: nextQuery,
+            size: currentSize,
+            sort,
+          }),
+          { scroll: false },
+        );
+      });
+    }, 300);
+
+    return () => window.clearTimeout(timeout);
+  }, [currentCategory, currentSize, query, router, searchValue, sort]);
+
+  function updateCatalogUrl(next: {
+    query?: string;
+    size?: string;
+    sort?: CatalogSort;
+  }) {
+    startTransition(() => {
+      router.replace(
+        buildCatalogHref({
+          category: currentCategory,
+          query,
+          size: currentSize,
+          sort,
+          ...next,
+        }),
+        { scroll: false },
+      );
+    });
+  }
+
+  function clearCatalogFilters() {
+    startTransition(() => {
+      router.replace("/catalog", { scroll: false });
+    });
+  }
 
   return (
     <>
@@ -59,44 +118,59 @@ export function CatalogFilters({
       </section>
 
       <section className="sticky top-16 z-30 border-y border-hairline bg-background/90 backdrop-blur-md">
-        <form className="mx-auto flex max-w-400 flex-wrap items-end gap-x-6 gap-y-3 px-4 py-4 md:px-6 lg:px-10">
-          {currentCategory ? (
-            <input name="category" type="hidden" value={currentCategory} />
-          ) : null}
+        <div className="mx-auto grid max-w-400 gap-x-6 gap-y-4 px-4 py-4 sm:grid-cols-2 md:px-6 lg:grid-cols-[minmax(8rem,10rem)_minmax(9rem,11rem)_minmax(16rem,1fr)_auto_auto] lg:items-end lg:px-10">
           <FormField htmlFor="size" label="Size">
             <Select
-              defaultValue={currentSize ?? ""}
               id="size"
               name="size"
+              onValueChange={(value) =>
+                updateCatalogUrl({ size: value || undefined })
+              }
               options={sizeOptions}
+              value={currentSize ?? ""}
             />
           </FormField>
           <FormField htmlFor="sort" label="Sort">
             <Select
-              defaultValue={sort}
               id="sort"
               name="sort"
+              onValueChange={(value) =>
+                updateCatalogUrl({
+                  sort: normalizeCatalogSort(value),
+                })
+              }
               options={catalogSortOptions}
+              value={sort}
             />
           </FormField>
           <FormField
-            className="min-w-56 flex-1 sm:max-w-xs"
+            className="sm:col-span-2 lg:col-span-1"
             htmlFor="q"
             label="Search"
           >
             <Input
-              defaultValue={query}
               id="q"
               name="q"
+              onChange={(event) => setSearchValue(event.target.value)}
               placeholder="Name, brand, or code"
               type="search"
+              value={searchValue}
             />
           </FormField>
-          <Button type="submit" variant="outline">
+          <div className="flex min-h-11 items-center gap-2 text-[11px] tracking-eyebrow text-muted-foreground uppercase">
             <Search />
-            Apply
+            {pending ? "Updating" : "Instant"}
+          </div>
+          <Button
+            disabled={!hasFilters}
+            onClick={clearCatalogFilters}
+            type="button"
+            variant="outline"
+          >
+            <X />
+            Clear
           </Button>
-        </form>
+        </div>
       </section>
     </>
   );

@@ -6,6 +6,7 @@ import { AuthFeedback } from "@/features/auth/components/auth-feedback";
 import { AuthFormFields } from "@/features/auth/components/auth-form-fields";
 import { useAuthForm } from "@/features/auth/hooks/use-auth-form";
 import type { AuthFormProps } from "@/features/auth/types";
+import { PageHeader } from "@/shared/components/page-header";
 import { Button } from "@/shared/components/ui/button";
 import { EyebrowLink } from "@/shared/components/ui/eyebrow-link";
 
@@ -18,13 +19,23 @@ export function AuthForm({
 
   return (
     <section className="mx-auto max-w-md px-6 py-24">
-      <div className="text-center">
-        <h1 className="font-display text-4xl">
-          {authForm.isSignup ? "Sign up" : "Log in"}
-        </h1>
-      </div>
+      <PageHeader
+        align="center"
+        className="text-center"
+        description={
+          authForm.isSignup
+            ? "Create an account to save favourites and keep track of selected pieces."
+            : "Access your saved pieces and account details."
+        }
+        size="compact"
+        title={authForm.isSignup ? "Sign up" : "Log in"}
+      />
 
-      <form className="mt-12 space-y-6" onSubmit={authForm.handleSubmit}>
+      <form
+        aria-busy={authForm.pending}
+        className="mt-12 space-y-6"
+        onSubmit={authForm.handleSubmit}
+      >
         {authForm.error ? (
           <AuthFeedback tone="error">{authForm.error}</AuthFeedback>
         ) : null}

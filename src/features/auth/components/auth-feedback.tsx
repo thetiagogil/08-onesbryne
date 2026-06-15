@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { cn } from "@/shared/utils/cn";
+import { FormFeedback } from "@/shared/components/form-feedback";
 
 type AuthFeedbackProps = {
   children: ReactNode;
@@ -8,16 +8,5 @@ type AuthFeedbackProps = {
 };
 
 export function AuthFeedback({ children, tone }: AuthFeedbackProps) {
-  return (
-    <div
-      className={cn(
-        "border px-4 py-3 text-sm",
-        tone === "error"
-          ? "border-destructive/40 text-destructive"
-          : "border-accent/40 text-accent",
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <FormFeedback tone={tone}>{children}</FormFeedback>;
 }
