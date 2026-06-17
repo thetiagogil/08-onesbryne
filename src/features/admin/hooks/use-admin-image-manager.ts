@@ -1,12 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import {
-  type ChangeEvent,
-  useRef,
-  useState,
-  useTransition,
-} from "react";
+import { type ChangeEvent, useRef, useState, useTransition } from "react";
 
 import {
   compressPieceImage,
@@ -31,10 +26,10 @@ type UseAdminImageManagerInput = {
   pieceName: string;
 };
 
-export function useAdminImageManager({
+export const useAdminImageManager = ({
   pieceId,
   pieceName,
-}: UseAdminImageManagerInput) {
+}: UseAdminImageManagerInput) => {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [state, setState] = useState<UploadState>({
@@ -136,4 +131,4 @@ export function useAdminImageManager({
     openFileDialog,
     state,
   };
-}
+};

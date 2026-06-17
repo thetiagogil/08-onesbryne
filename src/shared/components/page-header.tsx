@@ -14,7 +14,7 @@ type PageHeaderProps = {
   title: ReactNode;
 };
 
-export function PageHeader({
+export const PageHeader = ({
   align = "start",
   actions,
   backHref,
@@ -23,18 +23,14 @@ export function PageHeader({
   description,
   size = "default",
   title,
-}: PageHeaderProps) {
+}: PageHeaderProps) => {
   return (
-    <header className={cn("border-b border-hairline pb-6", className)}>
-      {backHref ? (
-        <EyebrowLink href={backHref}>{backLabel}</EyebrowLink>
-      ) : null}
+    <header className={cn("border-hairline border-b pb-6", className)}>
+      {backHref ? <EyebrowLink href={backHref}>{backLabel}</EyebrowLink> : null}
       <div
         className={cn(
           "mt-8 flex flex-wrap items-end gap-6",
-          align === "center"
-            ? "justify-center text-center"
-            : "justify-between",
+          align === "center" ? "justify-center text-center" : "justify-between",
         )}
       >
         <div className="min-w-0">
@@ -47,7 +43,7 @@ export function PageHeader({
             {title}
           </h1>
           {description ? (
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed md:text-base">
               {description}
             </p>
           ) : null}
@@ -56,4 +52,4 @@ export function PageHeader({
       </div>
     </header>
   );
-}
+};

@@ -10,17 +10,17 @@ type FormFieldProps = {
   required?: boolean;
 };
 
-export function FormField({
+export const FormField = ({
   children,
   className,
   htmlFor,
   label,
   required = false,
-}: FormFieldProps) {
+}: FormFieldProps) => {
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       <label
-        className="block text-[11px] tracking-eyebrow text-muted-foreground uppercase"
+        className="tracking-eyebrow text-muted-foreground block text-[11px] uppercase"
         htmlFor={htmlFor}
       >
         {label}
@@ -29,4 +29,4 @@ export function FormField({
       {children}
     </div>
   );
-}
+};

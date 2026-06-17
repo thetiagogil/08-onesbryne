@@ -3,13 +3,13 @@ type AccountStatProps = {
   value: number;
 };
 
-export function AccountStat({ label, value }: AccountStatProps) {
+export const AccountStat = ({ label, value }: AccountStatProps) => {
   return (
     <div className="bg-background p-8">
-      <p className="text-[10px] tracking-eyebrow text-muted-foreground uppercase">
+      <p className="tracking-eyebrow text-muted-foreground text-[10px] uppercase">
         {label}
       </p>
-      <p className="mt-2 font-display text-3xl">{value}</p>
+      <p className="font-display mt-2 text-3xl">{value}</p>
     </div>
   );
-}
+};

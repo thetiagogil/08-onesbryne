@@ -10,17 +10,17 @@ type PublicMobileMenuLinkProps = {
   href: string;
 };
 
-export function PublicMobileMenuLink({
+export const PublicMobileMenuLink = ({
   active,
   children,
   className,
   href,
-}: PublicMobileMenuLinkProps) {
+}: PublicMobileMenuLinkProps) => {
   return (
     <Link
       aria-current={active ? "page" : undefined}
       className={cn(
-        "w-fit text-sm tracking-eyebrow uppercase transition-colors link-underline",
+        "tracking-eyebrow link-underline w-fit text-sm uppercase transition-colors",
         active
           ? "text-foreground [background-size:100%_1px]"
           : "text-muted-foreground hover:text-foreground",
@@ -31,4 +31,4 @@ export function PublicMobileMenuLink({
       {children}
     </Link>
   );
-}
+};

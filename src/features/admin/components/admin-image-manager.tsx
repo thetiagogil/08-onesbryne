@@ -15,11 +15,11 @@ type AdminImageManagerProps = {
   pieceName: string;
 };
 
-export function AdminImageManager({
+export const AdminImageManager = ({
   images,
   pieceId,
   pieceName,
-}: AdminImageManagerProps) {
+}: AdminImageManagerProps) => {
   const {
     deleteImage,
     deletePending,
@@ -32,7 +32,7 @@ export function AdminImageManager({
   return (
     <section className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h2 className="text-[11px] tracking-eyebrow text-muted-foreground uppercase">
+        <h2 className="tracking-eyebrow text-muted-foreground text-[11px] uppercase">
           Images <span aria-hidden="true">*</span>
         </h2>
         <Button
@@ -42,11 +42,7 @@ export function AdminImageManager({
           type="button"
           variant="outline"
         >
-          {state.pending ? (
-            <Loader2 className="animate-spin" />
-          ) : (
-            <Upload />
-          )}
+          {state.pending ? <Loader2 className="animate-spin" /> : <Upload />}
           Upload image
         </Button>
         <input
@@ -73,11 +69,11 @@ export function AdminImageManager({
           />
         ))}
         {!images.length ? (
-          <div className="col-span-full border border-dashed border-hairline px-6 py-14 text-center text-sm text-muted-foreground">
+          <div className="border-hairline text-muted-foreground col-span-full border border-dashed px-6 py-14 text-center text-sm">
             Every piece needs at least one compressed WebP or JPEG image.
           </div>
         ) : null}
       </div>
     </section>
   );
-}
+};

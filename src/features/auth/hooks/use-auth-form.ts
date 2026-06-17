@@ -8,11 +8,11 @@ import { validateAuthInput } from "@/features/auth/lib/auth-validation";
 import type { AuthFormProps } from "@/features/auth/types";
 import { createClient } from "@/lib/supabase/browser";
 
-export function useAuthForm({
+export const useAuthForm = ({
   initialError,
   mode,
   next = "/",
-}: AuthFormProps) {
+}: AuthFormProps) => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -111,4 +111,4 @@ export function useAuthForm({
     setEmail,
     setPassword,
   };
-}
+};

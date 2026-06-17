@@ -39,9 +39,9 @@ export type CreatePieceImageFormInput = {
   width: number | null;
 };
 
-export function normalizePieceFormData(
+export const normalizePieceFormData = (
   formData: FormData,
-): ActionResult<PieceFormInput> {
+): ActionResult<PieceFormInput> => {
   const name = readString(formData, "name");
   const brand = readOptionalString(formData, "brand");
   const categorySlug = readString(formData, "categorySlug");
@@ -83,15 +83,15 @@ export function normalizePieceFormData(
       status,
     },
   };
-}
+};
 
 export function isPieceStatus(value: string): value is PieceStatus {
   return pieceStatuses.includes(value as PieceStatus);
 }
 
-export function normalizeCreatePieceImageFormData(
+export const normalizeCreatePieceImageFormData = (
   formData: FormData,
-): ActionResult<CreatePieceImageFormInput> {
+): ActionResult<CreatePieceImageFormInput> => {
   const file = formData.get(PIECE_IMAGE_FILE_FIELD);
 
   if (!(file instanceof File) || file.size === 0) {
@@ -116,14 +116,12 @@ export function normalizeCreatePieceImageFormData(
       width: readOptionalPositiveInteger(formData, PIECE_IMAGE_WIDTH_FIELD),
     },
   };
-}
+};
 
 export function isAcceptedPieceImageMimeType(
   value: string,
 ): value is PieceImageMimeType {
-  return ACCEPTED_PIECE_IMAGE_MIME_TYPES.includes(
-    value as PieceImageMimeType,
-  );
+  return ACCEPTED_PIECE_IMAGE_MIME_TYPES.includes(value as PieceImageMimeType);
 }
 
 function readString(formData: FormData, key: string) {

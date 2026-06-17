@@ -12,7 +12,7 @@ type ProfileMenuProps = {
   displayName: string;
 };
 
-export function ProfileMenu({ displayName }: ProfileMenuProps) {
+export const ProfileMenu = ({ displayName }: ProfileMenuProps) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -20,11 +20,11 @@ export function ProfileMenu({ displayName }: ProfileMenuProps) {
   return (
     <div className="flex items-center gap-3">
       {error ? (
-        <span className="hidden text-xs text-destructive sm:inline">
+        <span className="text-destructive hidden text-xs sm:inline">
           {error}
         </span>
       ) : null}
-      <span className="hidden max-w-40 truncate text-xs text-muted-foreground sm:inline">
+      <span className="text-muted-foreground hidden max-w-40 truncate text-xs sm:inline">
         {displayName}
       </span>
       <Button
@@ -62,4 +62,4 @@ export function ProfileMenu({ displayName }: ProfileMenuProps) {
       </Button>
     </div>
   );
-}
+};

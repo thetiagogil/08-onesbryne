@@ -11,13 +11,13 @@ type ProfileEditorProps = {
   currentUser: CurrentUser;
 };
 
-export function ProfileEditor({ currentUser }: ProfileEditorProps) {
+export const ProfileEditor = ({ currentUser }: ProfileEditorProps) => {
   const [editing, setEditing] = useState(false);
 
   return (
     <div className="space-y-4">
       <button
-        className="focus-soft flex w-full items-center gap-2 border border-hairline px-6 py-4 text-left text-[11px] tracking-eyebrow uppercase transition-colors hover:border-accent hover:text-accent"
+        className="focus-soft border-hairline tracking-eyebrow hover:border-accent hover:text-accent flex w-full items-center gap-2 border px-6 py-4 text-left text-[11px] uppercase transition-colors"
         onClick={() => setEditing((value) => !value)}
         type="button"
       >
@@ -26,7 +26,7 @@ export function ProfileEditor({ currentUser }: ProfileEditorProps) {
       </button>
 
       {editing ? (
-        <div className="border border-hairline px-6 py-6">
+        <div className="border-hairline border px-6 py-6">
           <SectionHeader
             description="This name appears in your account and internal profile."
             title="Profile details"
@@ -36,4 +36,4 @@ export function ProfileEditor({ currentUser }: ProfileEditorProps) {
       ) : null}
     </div>
   );
-}
+};

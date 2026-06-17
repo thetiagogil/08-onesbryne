@@ -1,6 +1,8 @@
 import type { CatalogSort } from "@/features/catalog/server/queries";
 
-export function normalizeCatalogSort(value: string | undefined): CatalogSort {
+export const normalizeCatalogSort = (
+  value: string | undefined,
+): CatalogSort => {
   switch (value) {
     case "oldest":
     case "price-asc":
@@ -11,9 +13,9 @@ export function normalizeCatalogSort(value: string | undefined): CatalogSort {
     default:
       return "newest";
   }
-}
+};
 
-export function buildCatalogHref({
+export const buildCatalogHref = ({
   category,
   query,
   size,
@@ -23,7 +25,7 @@ export function buildCatalogHref({
   query?: string;
   size?: string;
   sort: CatalogSort;
-}) {
+}) => {
   const params = new URLSearchParams();
 
   if (category) params.set("category", category);
@@ -34,4 +36,4 @@ export function buildCatalogHref({
   const queryString = params.toString();
 
   return queryString ? `/catalog?${queryString}` : "/catalog";
-}
+};

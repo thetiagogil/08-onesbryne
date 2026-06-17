@@ -16,17 +16,17 @@ type ProductCardProps = {
   variant?: "catalog" | "storefront";
 };
 
-export function ProductCard({
+export const ProductCard = ({
   piece,
   priority = false,
   variant = "catalog",
-}: ProductCardProps) {
+}: ProductCardProps) => {
   const primaryImage = piece.images[0];
   const isStorefront = variant === "storefront";
 
   return (
     <Link className="group block" href={`/pieces/${piece.code}`}>
-      <div className="relative aspect-[4/5] overflow-hidden bg-surface">
+      <div className="bg-surface relative aspect-[4/5] overflow-hidden">
         {primaryImage ? (
           <Image
             alt={primaryImage.altText ?? piece.name}
@@ -47,24 +47,24 @@ export function ProductCard({
       </div>
       <div className="mt-4 flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <div className="text-[10px] tracking-eyebrow text-muted-foreground uppercase">
+          <div className="tracking-eyebrow text-muted-foreground text-[10px] uppercase">
             {isStorefront
               ? piece.code
               : `${piece.code} - ${formatPieceSize(piece.size)}`}
           </div>
-          <h3 className="mt-1 font-display text-lg leading-tight">
+          <h3 className="font-display mt-1 text-lg leading-tight">
             {piece.name}
           </h3>
           {!isStorefront && piece.brand ? (
-            <p className="mt-1 truncate text-xs text-muted-foreground">
+            <p className="text-muted-foreground mt-1 truncate text-xs">
               {piece.brand}
             </p>
           ) : null}
         </div>
-        <p className="shrink-0 whitespace-nowrap text-sm text-muted-foreground">
+        <p className="text-muted-foreground shrink-0 text-sm whitespace-nowrap">
           {formatPrice(piece.priceCents)}
         </p>
       </div>
     </Link>
   );
-}
+};

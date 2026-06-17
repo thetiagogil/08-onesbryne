@@ -12,13 +12,13 @@ type ProductGalleryProps = {
   pieceName: string;
 };
 
-export function ProductGallery({ images, pieceName }: ProductGalleryProps) {
+export const ProductGallery = ({ images, pieceName }: ProductGalleryProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeImage = images[activeIndex];
 
   return (
     <div className="space-y-4">
-      <div className="relative aspect-[4/5] overflow-hidden bg-surface">
+      <div className="bg-surface relative aspect-[4/5] overflow-hidden">
         {activeImage ? (
           <Image
             alt={activeImage.altText ?? pieceName}
@@ -32,7 +32,7 @@ export function ProductGallery({ images, pieceName }: ProductGalleryProps) {
           <ImagePlaceholder />
         )}
         {images.length > 1 ? (
-          <div className="absolute right-3 bottom-3 bg-background/85 px-3 py-1 text-[10px] tracking-eyebrow text-muted-foreground uppercase backdrop-blur-sm">
+          <div className="bg-background/85 tracking-eyebrow text-muted-foreground absolute right-3 bottom-3 px-3 py-1 text-[10px] uppercase backdrop-blur-sm">
             {activeIndex + 1} / {images.length}
           </div>
         ) : null}
@@ -45,7 +45,7 @@ export function ProductGallery({ images, pieceName }: ProductGalleryProps) {
               aria-current={index === activeIndex}
               aria-label={`Show image ${index + 1}`}
               className={cn(
-                "relative aspect-square overflow-hidden border bg-surface transition-colors focus-soft",
+                "bg-surface focus-soft relative aspect-square overflow-hidden border transition-colors",
                 index === activeIndex
                   ? "border-accent"
                   : "border-hairline hover:border-muted-foreground",
@@ -67,4 +67,4 @@ export function ProductGallery({ images, pieceName }: ProductGalleryProps) {
       ) : null}
     </div>
   );
-}
+};

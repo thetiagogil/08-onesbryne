@@ -4,9 +4,9 @@ export type ProfileSettingsInput = {
   displayName: string;
 };
 
-export function normalizeProfileSettingsFormData(
+export const normalizeProfileSettingsFormData = (
   formData: FormData,
-): ActionResult<ProfileSettingsInput> {
+): ActionResult<ProfileSettingsInput> => {
   const displayName = formData.get("displayName");
   const value = typeof displayName === "string" ? displayName.trim() : "";
 
@@ -19,4 +19,4 @@ export function normalizeProfileSettingsFormData(
   }
 
   return { ok: true, data: { displayName: value } };
-}
+};

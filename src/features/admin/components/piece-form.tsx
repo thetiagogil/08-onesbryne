@@ -31,12 +31,12 @@ type PieceFormProps = {
   piece?: Piece;
 };
 
-export function PieceForm({
+export const PieceForm = ({
   categories,
   categorySizeOptions,
   children,
   piece,
-}: PieceFormProps) {
+}: PieceFormProps) => {
   const form = usePieceForm({ piece });
   const imagePreview = usePieceImagePreview();
   const categoryOptions = categories.map((category) => ({
@@ -183,7 +183,7 @@ export function PieceForm({
             type="file"
           />
           {imagePreview.preview ? (
-            <div className="grid gap-4 border border-hairline p-3 sm:grid-cols-[8rem_1fr] sm:items-center">
+            <div className="border-hairline grid gap-4 border p-3 sm:grid-cols-[8rem_1fr] sm:items-center">
               <div
                 aria-label={`Preview of ${imagePreview.preview.name}`}
                 className="aspect-[4/5] bg-cover bg-center"
@@ -193,16 +193,16 @@ export function PieceForm({
                 }}
               />
               <div>
-                <p className="text-sm text-foreground">
+                <p className="text-foreground text-sm">
                   {imagePreview.preview.name}
                 </p>
-                <p className="mt-1 text-xs text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-xs">
                   {imagePreview.preview.sizeLabel} before app compression.
                 </p>
               </div>
             </div>
           ) : null}
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Add the first JPEG or WebP image. It will be resized and compressed
             before the piece is created.
           </p>
@@ -218,4 +218,4 @@ export function PieceForm({
       />
     </form>
   );
-}
+};

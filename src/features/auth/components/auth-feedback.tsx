@@ -7,6 +7,6 @@ type AuthFeedbackProps = {
   tone: "error" | "success";
 };
 
-export function AuthFeedback({ children, tone }: AuthFeedbackProps) {
+export const AuthFeedback = ({ children, tone }: AuthFeedbackProps) => {
   return <FormFeedback tone={tone}>{children}</FormFeedback>;
-}
+};

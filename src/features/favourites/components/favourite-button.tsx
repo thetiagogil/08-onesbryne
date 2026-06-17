@@ -14,12 +14,12 @@ type FavouriteButtonProps = {
   returnPath: string;
 };
 
-export function FavouriteButton({
+export const FavouriteButton = ({
   isFavourite,
   isSignedIn,
   pieceId,
   returnPath,
-}: FavouriteButtonProps) {
+}: FavouriteButtonProps) => {
   const [pending, startTransition] = useTransition();
 
   if (!isSignedIn) {
@@ -56,4 +56,4 @@ export function FavouriteButton({
           : "Save to favourites"}
     </Button>
   );
-}
+};

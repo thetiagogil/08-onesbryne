@@ -13,23 +13,27 @@ type SignOutButtonProps = {
   pendingLabel?: string;
 };
 
-export function SignOutButton({
+export const SignOutButton = ({
   className,
   iconOnly = false,
   pendingLabel = "Logging out",
-}: SignOutButtonProps) {
+}: SignOutButtonProps) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   return (
-    <span className={iconOnly ? "inline-flex" : "flex flex-col items-stretch gap-1"}>
+    <span
+      className={iconOnly ? "inline-flex" : "flex flex-col items-stretch gap-1"}
+    >
       <button
-        aria-label={iconOnly ? (isPending ? pendingLabel : "Log out") : undefined}
+        aria-label={
+          iconOnly ? (isPending ? pendingLabel : "Log out") : undefined
+        }
         className={cn(
           iconOnly
-            ? "inline-flex items-center justify-center text-muted-foreground transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4"
-            : "flex items-center gap-2 text-[11px] tracking-eyebrow text-muted-foreground uppercase transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-3.5",
+            ? "text-muted-foreground hover:text-foreground inline-flex items-center justify-center transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4"
+            : "tracking-eyebrow text-muted-foreground hover:text-foreground flex items-center gap-2 text-[11px] uppercase transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-3.5",
           className,
         )}
         disabled={isPending}
@@ -54,10 +58,10 @@ export function SignOutButton({
         {iconOnly ? null : isPending ? pendingLabel : "Log out"}
       </button>
       {error ? (
-        <span className="text-xs tracking-normal text-destructive normal-case">
+        <span className="text-destructive text-xs tracking-normal normal-case">
           {error}
         </span>
       ) : null}
     </span>
   );
-}
+};

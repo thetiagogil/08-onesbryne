@@ -11,10 +11,10 @@ type ProtectedNavLinksProps = {
   pathname: string;
 };
 
-export function ProtectedNavLinks({
+export const ProtectedNavLinks = ({
   isAdmin,
   pathname,
-}: ProtectedNavLinksProps) {
+}: ProtectedNavLinksProps) => {
   const links = isAdmin
     ? [...protectedNavLinks, ...adminNavLinks]
     : protectedNavLinks;
@@ -29,7 +29,7 @@ export function ProtectedNavLinks({
           <Link
             aria-current={active ? "page" : undefined}
             className={cn(
-              "relative text-[11px] tracking-eyebrow uppercase transition-colors",
+              "tracking-eyebrow relative text-[11px] uppercase transition-colors",
               active
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground",
@@ -39,11 +39,11 @@ export function ProtectedNavLinks({
           >
             {link.label}
             {active ? (
-              <span className="absolute inset-x-0 -bottom-2 h-px bg-accent" />
+              <span className="bg-accent absolute inset-x-0 -bottom-2 h-px" />
             ) : null}
           </Link>
         );
       })}
     </>
   );
-}
+};

@@ -70,7 +70,7 @@ const pieceSelect = `
 
 const visibleStatuses = ["available", "reserved", "sold"];
 
-export async function getStorefrontData() {
+export const getStorefrontData = async () => {
   noStore();
 
   if (!isSupabaseConfigured()) {
@@ -96,9 +96,9 @@ export async function getStorefrontData() {
       mapPiece(client, row),
     ),
   };
-}
+};
 
-export async function getCatalogData(filters: CatalogFilters) {
+export const getCatalogData = async (filters: CatalogFilters) => {
   noStore();
 
   if (!isSupabaseConfigured()) {
@@ -184,9 +184,9 @@ export async function getCatalogData(filters: CatalogFilters) {
     pieces: (data as PieceWithImagesRow[]).map((row) => mapPiece(client, row)),
     sizes,
   };
-}
+};
 
-export async function getPieceByCode(code: string) {
+export const getPieceByCode = async (code: string) => {
   noStore();
 
   if (!isSupabaseConfigured()) {
@@ -209,9 +209,11 @@ export async function getPieceByCode(code: string) {
     configured: true,
     piece: data ? mapPiece(client, data as PieceWithImagesRow) : null,
   };
-}
+};
 
-export async function getFavouritePieceIds(userId: string | null | undefined) {
+export const getFavouritePieceIds = async (
+  userId: string | null | undefined,
+) => {
   noStore();
 
   if (!userId || !isSupabaseConfigured()) {
@@ -229,9 +231,9 @@ export async function getFavouritePieceIds(userId: string | null | undefined) {
   }
 
   return new Set(data.map((row) => row.piece_id));
-}
+};
 
-export async function getFavouritePieces(userId: string) {
+export const getFavouritePieces = async (userId: string) => {
   noStore();
 
   if (!isSupabaseConfigured()) {
@@ -262,7 +264,7 @@ export async function getFavouritePieces(userId: string) {
     .map((row) => mapPiece(client, row as PieceWithImagesRow));
 
   return { configured: true, pieces };
-}
+};
 
 export async function getActiveCategories(): Promise<Category[]> {
   if (!isSupabaseConfigured()) return [];

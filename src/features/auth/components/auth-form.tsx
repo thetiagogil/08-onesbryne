@@ -10,11 +10,7 @@ import { PageHeader } from "@/shared/components/page-header";
 import { Button } from "@/shared/components/ui/button";
 import { EyebrowLink } from "@/shared/components/ui/eyebrow-link";
 
-export function AuthForm({
-  initialError,
-  mode,
-  next = "/",
-}: AuthFormProps) {
+export const AuthForm = ({ initialError, mode, next = "/" }: AuthFormProps) => {
   const authForm = useAuthForm({ initialError, mode, next });
 
   return (
@@ -64,9 +60,11 @@ export function AuthForm({
 
       <div className="mt-8 text-center">
         <EyebrowLink href={authForm.alternateHref}>
-          {authForm.isSignup ? "Have an account? Log in" : "No account? Sign up"}
+          {authForm.isSignup
+            ? "Have an account? Log in"
+            : "No account? Sign up"}
         </EyebrowLink>
       </div>
     </section>
   );
-}
+};

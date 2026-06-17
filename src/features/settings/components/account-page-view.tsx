@@ -12,10 +12,10 @@ type AccountPageViewProps = {
   favouriteCount: number;
 };
 
-export function AccountPageView({
+export const AccountPageView = ({
   currentUser,
   favouriteCount,
-}: AccountPageViewProps) {
+}: AccountPageViewProps) => {
   return (
     <section className="mx-auto max-w-2xl px-6 py-24">
       <PageHeader
@@ -23,28 +23,22 @@ export function AccountPageView({
         title={currentUser.profile.displayName ?? "Onesbryne customer"}
       />
 
-      <div className="mt-12 border border-hairline">
+      <div className="border-hairline mt-12 border">
         <AccountStat label="Favourites" value={favouriteCount} />
       </div>
 
       <div className="mt-12 space-y-4">
         <ProfileEditor currentUser={currentUser} />
-        <ActionLink
-          href="/favourites"
-          icon={<Heart />}
-        >
+        <ActionLink href="/favourites" icon={<Heart />}>
           View favourites
         </ActionLink>
         {currentUser.profile.appRole === "admin" ? (
-          <ActionLink
-            href="/admin"
-            icon={<ShieldCheck />}
-          >
+          <ActionLink href="/admin" icon={<ShieldCheck />}>
             Open admin
           </ActionLink>
         ) : null}
-        <SignOutButton className="w-full border border-hairline px-6 py-4 text-left hover:border-destructive hover:text-destructive" />
+        <SignOutButton className="border-hairline hover:border-destructive hover:text-destructive w-full border px-6 py-4 text-left" />
       </div>
     </section>
   );
-}
+};

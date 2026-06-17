@@ -8,7 +8,7 @@ type PieceImagePreview = {
   url: string;
 };
 
-export function usePieceImagePreview() {
+export const usePieceImagePreview = () => {
   const [preview, setPreview] = useState<PieceImagePreview | null>(null);
   const objectUrlRef = useRef<string | null>(null);
 
@@ -44,7 +44,7 @@ export function usePieceImagePreview() {
   );
 
   return { handleImageChange, preview };
-}
+};
 
 function formatFileSize(bytes: number) {
   if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;

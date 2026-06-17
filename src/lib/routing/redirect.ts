@@ -1,7 +1,7 @@
-export function safeRedirectPath(
+export const safeRedirectPath = (
   value: string | null | undefined,
   fallback = "/",
-) {
+) => {
   const trimmed = value?.trim();
 
   if (
@@ -21,4 +21,4 @@ export function safeRedirectPath(
   } catch {
     return fallback;
   }
-}
+};

@@ -3,13 +3,13 @@ type AdminStatProps = {
   value: number;
 };
 
-export function AdminStat({ label, value }: AdminStatProps) {
+export const AdminStat = ({ label, value }: AdminStatProps) => {
   return (
     <div className="bg-background p-8">
-      <p className="text-[10px] tracking-eyebrow text-muted-foreground uppercase">
+      <p className="tracking-eyebrow text-muted-foreground text-[10px] uppercase">
         {label}
       </p>
-      <p className="mt-2 font-display text-4xl">{value}</p>
+      <p className="font-display mt-2 text-4xl">{value}</p>
     </div>
   );
-}
+};

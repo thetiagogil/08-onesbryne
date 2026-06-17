@@ -5,7 +5,7 @@ import { useFormStatus } from "react-dom";
 
 import { Button } from "@/shared/components/ui/button";
 
-export function ProfileSettingsSubmitButton() {
+export const ProfileSettingsSubmitButton = () => {
   const { pending } = useFormStatus();
 
   return (
@@ -14,4 +14,4 @@ export function ProfileSettingsSubmitButton() {
       Save profile
     </Button>
   );
-}
+};

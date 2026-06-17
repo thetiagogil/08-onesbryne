@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { getSupabaseEnv } from "@/lib/env";
 import type { Database } from "@/types/database.types";
 
-export async function createClient() {
+export const createClient = async () => {
   const { publishableKey, url } = getSupabaseEnv();
   const cookieStore = await cookies();
 
@@ -24,4 +24,4 @@ export async function createClient() {
       },
     },
   });
-}
+};

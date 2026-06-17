@@ -8,7 +8,7 @@ type FavouritesPageViewProps = {
   pieces: Piece[];
 };
 
-export function FavouritesPageView({ pieces }: FavouritesPageViewProps) {
+export const FavouritesPageView = ({ pieces }: FavouritesPageViewProps) => {
   return (
     <section className="mx-auto max-w-400 px-6 py-16 lg:px-10">
       <PageHeader
@@ -45,4 +45,4 @@ export function FavouritesPageView({ pieces }: FavouritesPageViewProps) {
       ) : null}
     </section>
   );
-}
+};

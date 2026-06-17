@@ -15,7 +15,7 @@ type CatalogPageViewProps = {
   sizes: PieceSize[];
 };
 
-export function CatalogPageView({
+export const CatalogPageView = ({
   categories,
   currentCategory,
   currentSize,
@@ -23,7 +23,7 @@ export function CatalogPageView({
   query,
   sort,
   sizes,
-}: CatalogPageViewProps) {
+}: CatalogPageViewProps) => {
   const filtersKey = [
     currentCategory ?? "",
     currentSize ?? "",
@@ -72,4 +72,4 @@ export function CatalogPageView({
       </section>
     </>
   );
-}
+};

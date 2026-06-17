@@ -10,13 +10,13 @@ type AdminPieceImageCardProps = {
   onDelete: (image: PieceImage) => void;
 };
 
-export function AdminPieceImageCard({
+export const AdminPieceImageCard = ({
   deleteDisabled,
   image,
   onDelete,
-}: AdminPieceImageCardProps) {
+}: AdminPieceImageCardProps) => {
   return (
-    <div className="group relative aspect-square overflow-hidden bg-surface">
+    <div className="group bg-surface relative aspect-square overflow-hidden">
       <Image
         alt={image.altText ?? ""}
         className="h-full w-full object-cover"
@@ -42,4 +42,4 @@ export function AdminPieceImageCard({
       </Button>
     </div>
   );
-}
+};

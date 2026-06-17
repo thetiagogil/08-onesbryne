@@ -12,7 +12,7 @@ type StorefrontPageProps = {
   pieces: Piece[];
 };
 
-export function StorefrontPage({ pieces }: StorefrontPageProps) {
+export const StorefrontPage = ({ pieces }: StorefrontPageProps) => {
   return (
     <>
       <section className="relative min-h-[88vh] overflow-hidden">
@@ -24,16 +24,16 @@ export function StorefrontPage({ pieces }: StorefrontPageProps) {
           sizes="100vw"
           src="/hero.jpg"
         />
-        <div aria-hidden className="absolute inset-0 bg-background/55" />
+        <div aria-hidden className="bg-background/55 absolute inset-0" />
         <div
           aria-hidden
-          className="absolute inset-0 bg-linear-to-b from-background/30 via-transparent to-background"
+          className="from-background/30 to-background absolute inset-0 bg-linear-to-b via-transparent"
         />
         <div className="reveal relative z-10 mx-auto flex min-h-[88vh] max-w-3xl flex-col items-center justify-center px-4 py-32 text-center md:px-6 md:py-40 lg:px-10">
-          <h1 className="font-display text-6xl tracking-wordmark uppercase md:text-7xl lg:text-8xl">
+          <h1 className="font-display tracking-wordmark text-6xl uppercase md:text-7xl lg:text-8xl">
             Onesbryne
           </h1>
-          <p className="mt-10 max-w-md text-sm leading-relaxed text-foreground/85 md:text-base">
+          <p className="text-foreground/85 mt-10 max-w-md text-sm leading-relaxed md:text-base">
             A private catalog of selected pieces.
           </p>
           <Button asChild className="mt-12" variant="outline">
@@ -72,7 +72,7 @@ export function StorefrontPage({ pieces }: StorefrontPageProps) {
         )}
       </section>
 
-      <section className="border-t border-hairline">
+      <section className="border-hairline border-t">
         <div className="mx-auto max-w-3xl px-4 py-32 text-center md:px-6 lg:px-10">
           <p className="font-display text-2xl leading-relaxed md:text-3xl">
             Every piece here was chosen, not produced, not stocked. If something
@@ -82,4 +82,4 @@ export function StorefrontPage({ pieces }: StorefrontPageProps) {
       </section>
     </>
   );
-}
+};

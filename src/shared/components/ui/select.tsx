@@ -30,15 +30,15 @@ type SelectProps = Omit<
   value?: string;
 };
 
-function fromRadixSelectValue(value: string) {
+const fromRadixSelectValue = (value: string) => {
   return value === EMPTY_SELECT_VALUE ? "" : value;
-}
+};
 
-function toRadixSelectValue(value: string | undefined) {
+const toRadixSelectValue = (value: string | undefined) => {
   return value ? value : EMPTY_SELECT_VALUE;
-}
+};
 
-export function Select({
+export const Select = ({
   className,
   contentClassName,
   defaultValue = "",
@@ -52,7 +52,7 @@ export function Select({
   required,
   value,
   ...props
-}: SelectProps) {
+}: SelectProps) => {
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = React.useState(defaultValue);
   const selectedValue = isControlled ? value : internalValue;
@@ -69,9 +69,7 @@ export function Select({
 
   return (
     <SelectPrimitive.Root
-      defaultValue={
-        isControlled ? undefined : toRadixSelectValue(defaultValue)
-      }
+      defaultValue={isControlled ? undefined : toRadixSelectValue(defaultValue)}
       disabled={disabled}
       onValueChange={handleValueChange}
       required={required}
@@ -90,33 +88,33 @@ export function Select({
       <SelectPrimitive.Trigger
         aria-required={required}
         className={cn(
-          "focus-soft flex h-11 w-full items-center justify-between gap-3 border-b border-hairline bg-transparent py-2 pr-1 text-left text-sm text-foreground disabled:pointer-events-none disabled:opacity-50 data-[placeholder]:text-muted-foreground/60",
+          "focus-soft border-hairline text-foreground data-[placeholder]:text-muted-foreground/60 flex h-11 w-full items-center justify-between gap-3 border-b bg-transparent py-2 pr-1 text-left text-sm disabled:pointer-events-none disabled:opacity-50",
           className,
         )}
         id={id}
       >
         <SelectPrimitive.Value placeholder={placeholder} />
         <SelectPrimitive.Icon asChild>
-          <ChevronDown className="size-3.5 shrink-0 text-muted-foreground" />
+          <ChevronDown className="text-muted-foreground size-3.5 shrink-0" />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
           className={cn(
-            "z-50 max-h-80 min-w-[var(--radix-select-trigger-width)] overflow-hidden border border-hairline bg-background shadow-xl",
+            "border-hairline bg-background z-50 max-h-80 min-w-[var(--radix-select-trigger-width)] overflow-hidden border shadow-xl",
             contentClassName,
           )}
           position="popper"
           sideOffset={6}
         >
-          <SelectPrimitive.ScrollUpButton className="flex h-6 cursor-default items-center justify-center text-muted-foreground">
+          <SelectPrimitive.ScrollUpButton className="text-muted-foreground flex h-6 cursor-default items-center justify-center">
             <ChevronUp className="size-3.5" />
           </SelectPrimitive.ScrollUpButton>
           <SelectPrimitive.Viewport className="p-1">
             <SelectPrimitive.Group>
               {options.map((option) => (
                 <SelectPrimitive.Item
-                  className="relative flex min-h-9 cursor-default select-none items-center py-2 pr-8 pl-3 text-sm text-foreground outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-surface"
+                  className="text-foreground data-[highlighted]:bg-surface relative flex min-h-9 cursor-default items-center py-2 pr-8 pl-3 text-sm transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                   disabled={option.disabled}
                   key={option.value || "empty"}
                   value={toRadixSelectValue(option.value)}
@@ -131,11 +129,11 @@ export function Select({
               ))}
             </SelectPrimitive.Group>
           </SelectPrimitive.Viewport>
-          <SelectPrimitive.ScrollDownButton className="flex h-6 cursor-default items-center justify-center text-muted-foreground">
+          <SelectPrimitive.ScrollDownButton className="text-muted-foreground flex h-6 cursor-default items-center justify-center">
             <ChevronDown className="size-3.5" />
           </SelectPrimitive.ScrollDownButton>
         </SelectPrimitive.Content>
       </SelectPrimitive.Portal>
     </SelectPrimitive.Root>
   );
-}
+};

@@ -8,11 +8,11 @@ type AppLogoProps = {
   href?: string;
 };
 
-export function AppLogo({ className, href = "/" }: AppLogoProps) {
+export const AppLogo = ({ className, href = "/" }: AppLogoProps) => {
   return (
     <Link
       className={cn(
-        "font-display text-xl tracking-wordmark text-foreground uppercase",
+        "font-display tracking-wordmark text-foreground text-xl uppercase",
         className,
       )}
       href={href}
@@ -20,4 +20,4 @@ export function AppLogo({ className, href = "/" }: AppLogoProps) {
       {APP_NAME}
     </Link>
   );
-}
+};

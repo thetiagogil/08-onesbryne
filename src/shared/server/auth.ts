@@ -22,7 +22,7 @@ export class AdminRequiredError extends Error {
   }
 }
 
-export async function getCurrentUser(): Promise<CurrentUser | null> {
+export const getCurrentUser = async (): Promise<CurrentUser | null> => {
   if (!isSupabaseConfigured()) return null;
 
   const client = await createClient();
@@ -37,9 +37,9 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
     id: user.id,
     profile: mapProfile(profile),
   };
-}
+};
 
-export async function requireUser(next = "/") {
+export const requireUser = async (next = "/") => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -47,9 +47,9 @@ export async function requireUser(next = "/") {
   }
 
   return currentUser;
-}
+};
 
-export async function requireAdmin() {
+export const requireAdmin = async () => {
   const currentUser = await requireUser("/admin");
 
   if (currentUser.profile.appRole !== "admin") {
@@ -57,9 +57,9 @@ export async function requireAdmin() {
   }
 
   return currentUser;
-}
+};
 
-export async function requireAuthUser(client: AppSupabaseClient) {
+export const requireAuthUser = async (client: AppSupabaseClient) => {
   const user = await getCurrentAuthUser(client);
 
   if (!user) {
@@ -67,9 +67,9 @@ export async function requireAuthUser(client: AppSupabaseClient) {
   }
 
   return user;
-}
+};
 
-export async function requireAdminAuthUser(client: AppSupabaseClient) {
+export const requireAdminAuthUser = async (client: AppSupabaseClient) => {
   const user = await requireAuthUser(client);
   const profile = await readProfile(client, user.id);
 
@@ -78,7 +78,7 @@ export async function requireAdminAuthUser(client: AppSupabaseClient) {
   }
 
   return user;
-}
+};
 
 export async function getCurrentAuthUser(client: AppSupabaseClient) {
   const {

@@ -3,11 +3,11 @@ import { safeRedirectPath } from "@/lib/routing/redirect";
 
 const authRoutePathnames = new Set(["/auth", "/login", "/signup"]);
 
-export function getAuthModeHref(
+export const getAuthModeHref = (
   mode: AuthMode,
   next: string,
   error?: string | null,
-) {
+) => {
   const params = new URLSearchParams();
 
   if (mode === "signup") {
@@ -25,12 +25,12 @@ export function getAuthModeHref(
   const queryString = params.toString();
 
   return queryString ? `/auth?${queryString}` : "/auth";
-}
+};
 
-export function normalizeAuthNextPath(
+export const normalizeAuthNextPath = (
   value: string | null | undefined,
   fallback = "/",
-) {
+) => {
   const next = safeRedirectPath(value, fallback);
 
   if (isAuthPathname(next)) {
@@ -38,11 +38,11 @@ export function normalizeAuthNextPath(
   }
 
   return next;
-}
+};
 
-export function normalizeAuthMode(value: string | undefined): AuthMode {
+export const normalizeAuthMode = (value: string | undefined): AuthMode => {
   return value === "signup" ? "signup" : "login";
-}
+};
 
 function isAuthPathname(value: string) {
   const pathname = value.split(/[?#]/, 1)[0] ?? value;

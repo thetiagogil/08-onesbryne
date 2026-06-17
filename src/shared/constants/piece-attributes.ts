@@ -50,24 +50,24 @@ export const pieceStatusLabels: Record<PieceStatus, string> = {
   sold: "Sold",
 };
 
-export function formatPieceSize(value: PieceSize) {
+export const formatPieceSize = (value: PieceSize) => {
   return (
     pieceSizeOptions.find((option) => option.value === value)?.label ?? value
   );
-}
+};
 
-export function formatPieceCondition(value: PieceCondition) {
+export const formatPieceCondition = (value: PieceCondition) => {
   return (
     pieceConditionOptions.find((option) => option.value === value)?.label ??
     value
   );
-}
+};
 
-export function formatPieceStatus(value: PieceStatus) {
+export const formatPieceStatus = (value: PieceStatus) => {
   return pieceStatusLabels[value];
-}
+};
 
-export function sortPieceSizes(values: PieceSize[]) {
+export const sortPieceSizes = (values: PieceSize[]) => {
   const order = new Map(
     pieceSizeOptions.map((option, index) => [option.value, index]),
   );
@@ -77,12 +77,12 @@ export function sortPieceSizes(values: PieceSize[]) {
       (order.get(left) ?? Number.MAX_SAFE_INTEGER) -
       (order.get(right) ?? Number.MAX_SAFE_INTEGER),
   );
-}
+};
 
-export function isPieceSize(value: string): value is PieceSize {
+export const isPieceSize = (value: string): value is PieceSize => {
   return pieceSizeOptions.some((option) => option.value === value);
-}
+};
 
-export function isPieceCondition(value: string): value is PieceCondition {
+export const isPieceCondition = (value: string): value is PieceCondition => {
   return pieceConditionOptions.some((option) => option.value === value);
-}
+};

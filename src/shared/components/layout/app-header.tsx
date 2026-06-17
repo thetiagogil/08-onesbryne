@@ -10,18 +10,18 @@ type AppHeaderProps = ComponentPropsWithoutRef<"header"> & {
   leading?: ReactNode;
 };
 
-export function AppHeader({
+export const AppHeader = ({
   actions,
   center,
   className,
   innerClassName,
   leading,
   ...props
-}: AppHeaderProps) {
+}: AppHeaderProps) => {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b border-hairline bg-background/80 backdrop-blur-md",
+        "border-hairline bg-background/80 sticky top-0 z-40 border-b backdrop-blur-md",
         className,
       )}
       {...props}
@@ -50,4 +50,4 @@ export function AppHeader({
       </div>
     </header>
   );
-}
+};

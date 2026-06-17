@@ -8,9 +8,9 @@ type ProtectedAppShellProps = {
   currentUser: CurrentUser;
 };
 
-export function ProtectedAppShell({
+export const ProtectedAppShell = ({
   children,
   currentUser,
-}: ProtectedAppShellProps) {
+}: ProtectedAppShellProps) => {
   return <SiteShell currentUser={currentUser}>{children}</SiteShell>;
-}
+};

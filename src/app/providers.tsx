@@ -2,6 +2,6 @@
 
 import type { ReactNode } from "react";
 
-export function Providers({ children }: { children: ReactNode }) {
+export const Providers = ({ children }: { children: ReactNode }) => {
   return children;
-}
+};

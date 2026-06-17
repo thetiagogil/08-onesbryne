@@ -16,7 +16,9 @@ type ProfileSettingsFormProps = {
   currentUser: CurrentUser;
 };
 
-export function ProfileSettingsForm({ currentUser }: ProfileSettingsFormProps) {
+export const ProfileSettingsForm = ({
+  currentUser,
+}: ProfileSettingsFormProps) => {
   const [state, formAction] = useActionState<ProfileSettingsState, FormData>(
     updateProfileSettingsAction,
     null,
@@ -44,4 +46,4 @@ export function ProfileSettingsForm({ currentUser }: ProfileSettingsFormProps) {
       <ProfileSettingsSubmitButton />
     </form>
   );
-}
+};

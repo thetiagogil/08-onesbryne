@@ -2,11 +2,16 @@
   "name": "onesbryne",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "postcss": "8.5.15"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -35,6 +40,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "prettier": "^3.8.4",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

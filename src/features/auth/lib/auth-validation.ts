@@ -8,13 +8,13 @@ type ValidateAuthInputOptions = {
   password: string;
 };
 
-export function validateAuthInput({
+export const validateAuthInput = ({
   confirmPassword,
   displayName,
   email,
   isSignup,
   password,
-}: ValidateAuthInputOptions) {
+}: ValidateAuthInputOptions) => {
   if (isSignup && !displayName.trim()) {
     return "Name is required.";
   }
@@ -30,4 +30,4 @@ export function validateAuthInput({
   }
 
   return null;
-}
+};

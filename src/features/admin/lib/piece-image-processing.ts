@@ -12,18 +12,21 @@ export type CompressedPieceImage = {
   width: number;
 };
 
-export function validatePieceImageFile(file: File) {
+export const validatePieceImageFile = (file: File) => {
   if (!isAcceptedPieceImageMimeType(file.type)) {
     throw new Error("Only JPEG and WebP images are supported.");
   }
-}
+};
 
-export async function compressPieceImage(
+export const compressPieceImage = async (
   file: File,
-): Promise<CompressedPieceImage> {
+): Promise<CompressedPieceImage> => {
   const bitmap = await createImageBitmap(file);
   const maxDimension = 1800;
-  const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
+  const scale = Math.min(
+    1,
+    maxDimension / Math.max(bitmap.width, bitmap.height),
+  );
   const width = Math.max(1, Math.round(bitmap.width * scale));
   const height = Math.max(1, Math.round(bitmap.height * scale));
   const canvas = document.createElement("canvas");
@@ -44,16 +47,16 @@ export async function compressPieceImage(
   }
 
   throw new Error("Image is too large after compression.");
-}
+};
 
-export function toCompressedPieceImageFile(
+export const toCompressedPieceImageFile = (
   file: File,
   image: CompressedPieceImage,
-) {
+) => {
   return new File([image.blob], `${getImageBaseName(file.name)}.webp`, {
     type: image.blob.type,
   });
-}
+};
 
 function canvasToBlob(
   canvas: HTMLCanvasElement,
@@ -90,7 +93,5 @@ function getImageBaseName(fileName: string) {
 function isAcceptedPieceImageMimeType(
   value: string,
 ): value is PieceImageMimeType {
-  return ACCEPTED_PIECE_IMAGE_MIME_TYPES.includes(
-    value as PieceImageMimeType,
-  );
+  return ACCEPTED_PIECE_IMAGE_MIME_TYPES.includes(value as PieceImageMimeType);
 }

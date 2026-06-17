@@ -29,7 +29,7 @@ type AdminPiecesFiltersProps = {
   pageSize: AdminPiecePageSize;
 };
 
-export function AdminPiecesFilters({
+export const AdminPiecesFilters = ({
   canClear,
   categories,
   filters,
@@ -37,7 +37,7 @@ export function AdminPiecesFilters({
   onFiltersChange,
   onPageSizeChange,
   pageSize,
-}: AdminPiecesFiltersProps) {
+}: AdminPiecesFiltersProps) => {
   const categoryOptions = [
     { label: "All categories", value: "" },
     ...categories.map((category) => ({
@@ -144,4 +144,4 @@ export function AdminPiecesFilters({
       </div>
     </div>
   );
-}
+};

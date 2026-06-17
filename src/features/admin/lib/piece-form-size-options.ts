@@ -12,23 +12,23 @@ type InitialPieceFormSizeInput = {
   pieceSize?: PieceSize;
 };
 
-export function getPieceFormSizeOptions(
+export const getPieceFormSizeOptions = (
   categorySizeOptions: CategorySizeOption[],
   categorySlug: string,
-): SelectOption[] {
+): SelectOption[] => {
   return categorySizeOptions
     .filter((option) => option.categorySlug === categorySlug)
     .map((option) => ({
       label: formatPieceSize(option.size),
       value: option.size,
     }));
-}
+};
 
-export function getInitialPieceFormSize({
+export const getInitialPieceFormSize = ({
   categorySizeOptions,
   categorySlug,
   pieceSize,
-}: InitialPieceFormSizeInput): PieceSize | "" {
+}: InitialPieceFormSizeInput): PieceSize | "" => {
   const options = getPieceFormSizeOptions(categorySizeOptions, categorySlug);
 
   if (pieceSize && options.some((option) => option.value === pieceSize)) {
@@ -36,4 +36,4 @@ export function getInitialPieceFormSize({
   }
 
   return options[0]?.value ?? "";
-}
+};

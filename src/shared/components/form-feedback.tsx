@@ -16,11 +16,11 @@ const formFeedbackTones: Record<FormFeedbackTone, string> = {
   success: "border-accent/40 text-accent",
 };
 
-export function FormFeedback({
+export const FormFeedback = ({
   children,
   className,
   tone = "info",
-}: FormFeedbackProps) {
+}: FormFeedbackProps) => {
   return (
     <div
       className={cn(
@@ -32,4 +32,4 @@ export function FormFeedback({
       {children}
     </div>
   );
-}
+};

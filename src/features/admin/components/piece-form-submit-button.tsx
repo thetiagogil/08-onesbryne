@@ -8,15 +8,15 @@ type PieceFormSubmitButtonProps = {
   pendingLabel: string;
 };
 
-export function PieceFormSubmitButton({
+export const PieceFormSubmitButton = ({
   label,
   pending,
   pendingLabel,
-}: PieceFormSubmitButtonProps) {
+}: PieceFormSubmitButtonProps) => {
   return (
     <Button disabled={pending} type="submit">
       {pending ? <Loader2 className="animate-spin" /> : null}
       {pending ? pendingLabel : label}
     </Button>
   );
-}
+};

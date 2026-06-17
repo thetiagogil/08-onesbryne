@@ -3,13 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import {
-  isNavLinkActive,
-  publicNavLinks,
-} from "@/shared/constants/navigation";
+import { isNavLinkActive, publicNavLinks } from "@/shared/constants/navigation";
 import { cn } from "@/shared/utils/cn";
 
-export function PublicNavLinks() {
+export const PublicNavLinks = () => {
   const pathname = usePathname();
 
   return (
@@ -21,7 +18,7 @@ export function PublicNavLinks() {
           <Link
             aria-current={active ? "page" : undefined}
             className={cn(
-              "hidden text-[11px] tracking-eyebrow uppercase transition-colors link-underline md:inline",
+              "tracking-eyebrow link-underline hidden text-[11px] uppercase transition-colors md:inline",
               active
                 ? "text-foreground [background-size:100%_1px]"
                 : "text-muted-foreground hover:text-foreground",
@@ -35,4 +32,4 @@ export function PublicNavLinks() {
       })}
     </>
   );
-}
+};

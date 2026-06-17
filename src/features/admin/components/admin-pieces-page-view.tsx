@@ -19,7 +19,10 @@ import {
   type AdminPiecePageSize,
 } from "@/features/admin/lib/admin-piece-filters";
 import { getPieceStatusCounts } from "@/features/admin/lib/piece-status-counts";
-import { formatCategoryLabel, formatPrice } from "@/features/catalog/lib/format";
+import {
+  formatCategoryLabel,
+  formatPrice,
+} from "@/features/catalog/lib/format";
 import { EmptyState } from "@/shared/components/empty-state";
 import { PageHeader } from "@/shared/components/page-header";
 import { Button } from "@/shared/components/ui/button";
@@ -31,10 +34,10 @@ type AdminPiecesPageViewProps = {
   pieces: Piece[];
 };
 
-export function AdminPiecesPageView({
+export const AdminPiecesPageView = ({
   categories,
   pieces,
-}: AdminPiecesPageViewProps) {
+}: AdminPiecesPageViewProps) => {
   const [filters, setFilters] = useState(defaultAdminPieceFilters);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(defaultAdminPiecePageSize);
@@ -96,7 +99,7 @@ export function AdminPiecesPageView({
         title="The atelier"
       />
 
-      <div className="mt-12 grid gap-px border border-hairline bg-hairline sm:grid-cols-4">
+      <div className="border-hairline bg-hairline mt-12 grid gap-px border sm:grid-cols-4">
         <AdminStat label="Available" value={counts.available} />
         <AdminStat label="Drafts" value={counts.draft} />
         <AdminStat label="Sold" value={counts.sold} />
@@ -113,17 +116,17 @@ export function AdminPiecesPageView({
         pageSize={pageSize}
       />
 
-      <div className="mt-6 text-[11px] tracking-eyebrow text-muted-foreground uppercase">
+      <div className="tracking-eyebrow text-muted-foreground mt-6 text-[11px] uppercase">
         Showing {firstVisiblePiece}-{lastVisiblePiece} of{" "}
         {filteredPieces.length}{" "}
         {filteredPieces.length === 1 ? "piece" : "pieces"}
         {hasFilters ? ` from ${pieces.length} total` : null}
       </div>
 
-      <div className="mt-4 overflow-x-auto border border-hairline">
-        <table className="min-w-[980px] w-full border-collapse text-left">
+      <div className="border-hairline mt-4 overflow-x-auto border">
+        <table className="w-full min-w-[980px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-hairline text-[10px] tracking-eyebrow text-muted-foreground uppercase">
+            <tr className="border-hairline tracking-eyebrow text-muted-foreground border-b text-[10px] uppercase">
               <th className="px-6 py-4 font-medium">Image</th>
               <th className="px-6 py-4 font-medium">Name</th>
               <th className="px-6 py-4 font-medium">Code</th>
@@ -138,12 +141,12 @@ export function AdminPiecesPageView({
             {visiblePieces.length ? (
               visiblePieces.map((piece) => (
                 <tr
-                  className="border-b border-hairline transition-colors hover:bg-surface"
+                  className="border-hairline hover:bg-surface border-b transition-colors"
                   key={piece.id}
                 >
                   <td className="px-6 py-4">
                     <Link
-                      className="relative block aspect-square w-16 overflow-hidden bg-surface"
+                      className="bg-surface relative block aspect-square w-16 overflow-hidden"
                       href={`/pieces/${piece.code}`}
                     >
                       {piece.images[0] ? (
@@ -160,12 +163,12 @@ export function AdminPiecesPageView({
                   <td className="px-6 py-4">
                     <div className="font-display text-base">{piece.name}</div>
                     {piece.brand ? (
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-muted-foreground text-xs">
                         {piece.brand}
                       </div>
                     ) : null}
                   </td>
-                  <td className="px-6 py-4 text-xs tracking-eyebrow text-muted-foreground uppercase">
+                  <td className="tracking-eyebrow text-muted-foreground px-6 py-4 text-xs uppercase">
                     {piece.code}
                   </td>
                   <td className="px-6 py-4 text-sm">
@@ -194,10 +197,7 @@ export function AdminPiecesPageView({
               ))
             ) : (
               <tr>
-                <td
-                  className="px-6 py-8"
-                  colSpan={8}
-                >
+                <td className="px-6 py-8" colSpan={8}>
                   <EmptyState
                     actionHref={hasFilters ? undefined : "/admin/pieces/new"}
                     actionLabel={hasFilters ? undefined : "Create piece"}
@@ -219,7 +219,7 @@ export function AdminPiecesPageView({
         </table>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-[11px] tracking-eyebrow text-muted-foreground uppercase">
+      <div className="tracking-eyebrow text-muted-foreground mt-4 flex flex-wrap items-center justify-between gap-4 text-[11px] uppercase">
         <span>
           Page {currentPage} of {pageCount}
         </span>
@@ -248,4 +248,4 @@ export function AdminPiecesPageView({
       </div>
     </section>
   );
-}
+};

@@ -5,12 +5,12 @@ type BuildPieceImageStoragePathInput = {
   uniqueId: string;
 };
 
-export function buildPieceImageStoragePath({
+export const buildPieceImageStoragePath = ({
   originalName,
   pieceId,
   timestamp = Date.now(),
   uniqueId,
-}: BuildPieceImageStoragePathInput) {
+}: BuildPieceImageStoragePathInput) => {
   const baseName =
     originalName
       .replace(/\.[^.]+$/, "")
@@ -20,4 +20,4 @@ export function buildPieceImageStoragePath({
       .slice(0, 48) || "piece";
 
   return `pieces/${pieceId}/${timestamp}-${uniqueId}-${baseName}.webp`;
-}
+};

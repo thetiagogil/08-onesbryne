@@ -5,14 +5,14 @@ import { cn } from "@/shared/utils/cn";
 
 type EyebrowLinkProps = ComponentProps<typeof Link>;
 
-export function EyebrowLink({ className, ...props }: EyebrowLinkProps) {
+export const EyebrowLink = ({ className, ...props }: EyebrowLinkProps) => {
   return (
     <Link
       className={cn(
-        "text-[11px] tracking-eyebrow text-muted-foreground uppercase link-underline",
+        "tracking-eyebrow text-muted-foreground link-underline text-[11px] uppercase",
         className,
       )}
       {...props}
     />
   );
-}
+};

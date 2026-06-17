@@ -11,23 +11,20 @@ type EmptyStateProps = {
   title: string;
 };
 
-export function EmptyState({
+export const EmptyState = ({
   actionHref,
   actionLabel,
   className,
   description,
   title,
-}: EmptyStateProps) {
+}: EmptyStateProps) => {
   return (
     <div
-      className={cn(
-        "border border-hairline px-6 py-20 text-center",
-        className,
-      )}
+      className={cn("border-hairline border px-6 py-20 text-center", className)}
     >
       <h2 className="font-display text-3xl">{title}</h2>
       {description ? (
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+        <p className="text-muted-foreground mx-auto mt-3 max-w-md text-sm leading-relaxed">
           {description}
         </p>
       ) : null}
@@ -38,4 +35,4 @@ export function EmptyState({
       ) : null}
     </div>
   );
-}
+};

@@ -15,15 +15,15 @@ type BadgeProps = ComponentPropsWithoutRef<"span"> & {
   tone?: BadgeTone;
 };
 
-export function Badge({ className, tone = "muted", ...props }: BadgeProps) {
+export const Badge = ({ className, tone = "muted", ...props }: BadgeProps) => {
   return (
     <span
       className={cn(
-        "inline-flex items-center px-2 py-1 text-[10px] tracking-eyebrow uppercase",
+        "tracking-eyebrow inline-flex items-center px-2 py-1 text-[10px] uppercase",
         badgeTones[tone],
         className,
       )}
       {...props}
     />
   );
-}
+};

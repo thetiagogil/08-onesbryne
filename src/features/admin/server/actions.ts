@@ -25,10 +25,10 @@ export type PieceFormState = ActionResult<{ id: string }> | null;
 
 type ServerSupabaseClient = Awaited<ReturnType<typeof createClient>>;
 
-export async function createPieceAction(
+export const createPieceAction = async (
   _previousState: PieceFormState,
   formData: FormData,
-): Promise<PieceFormState> {
+): Promise<PieceFormState> => {
   const normalized = normalizePieceFormData(formData);
 
   if (!normalized.ok) return normalized;
@@ -40,10 +40,7 @@ export async function createPieceAction(
   const client = await createClient();
   await requireAdminAuthUser(client);
 
-  const categorySize = await ensureCategorySizeAllowed(
-    client,
-    normalized.data,
-  );
+  const categorySize = await ensureCategorySizeAllowed(client, normalized.data);
 
   if (!categorySize.ok) return categorySize;
 
@@ -103,13 +100,13 @@ export async function createPieceAction(
 
   revalidateAdminSurfaces();
   redirect(`/admin/pieces/${data.id}/edit`);
-}
+};
 
-export async function updatePieceAction(
+export const updatePieceAction = async (
   pieceId: string,
   _previousState: PieceFormState,
   formData: FormData,
-): Promise<PieceFormState> {
+): Promise<PieceFormState> => {
   const normalized = normalizePieceFormData(formData);
 
   if (!normalized.ok) return normalized;
@@ -117,10 +114,7 @@ export async function updatePieceAction(
   const client = await createClient();
   await requireAdminAuthUser(client);
 
-  const categorySize = await ensureCategorySizeAllowed(
-    client,
-    normalized.data,
-  );
+  const categorySize = await ensureCategorySizeAllowed(client, normalized.data);
 
   if (!categorySize.ok) return categorySize;
 
@@ -155,9 +149,9 @@ export async function updatePieceAction(
     data: { id: pieceId },
     message: "Piece saved.",
   };
-}
+};
 
-export async function archivePieceAction(pieceId: string) {
+export const archivePieceAction = async (pieceId: string) => {
   const client = await createClient();
   await requireAdminAuthUser(client);
 
@@ -169,7 +163,7 @@ export async function archivePieceAction(pieceId: string) {
   if (error) throw new Error(error.message);
 
   revalidateAdminSurfaces();
-}
+};
 
 export type AddPieceImageInput = {
   altText?: string | null;
@@ -181,9 +175,9 @@ export type AddPieceImageInput = {
   width: number | null;
 };
 
-export async function addPieceImageAction(
+export const addPieceImageAction = async (
   input: AddPieceImageInput,
-): Promise<ActionResult<{ id: string }>> {
+): Promise<ActionResult<{ id: string }>> => {
   const client = await createClient();
   await requireAdminAuthUser(client);
 
@@ -215,13 +209,13 @@ export async function addPieceImageAction(
   revalidatePath(`/admin/pieces/${input.pieceId}/edit`);
 
   return result;
-}
+};
 
-export async function deletePieceImageAction(
+export const deletePieceImageAction = async (
   pieceId: string,
   imageId: string,
   storagePath: string,
-): Promise<ActionResult> {
+): Promise<ActionResult> => {
   const client = await createClient();
   await requireAdminAuthUser(client);
 
@@ -263,7 +257,7 @@ export async function deletePieceImageAction(
   revalidatePath(`/admin/pieces/${pieceId}/edit`);
 
   return { ok: true, data: undefined };
-}
+};
 
 function toPieceWrite(
   input: PieceFormInput,
@@ -286,8 +280,7 @@ function toPieceWrite(
         ? (existing?.existingPublishedAt ?? now)
         : existing?.existingPublishedAt,
     size_label: input.size,
-    sold_at:
-      input.status === "sold" ? (existing?.existingSoldAt ?? now) : null,
+    sold_at: input.status === "sold" ? (existing?.existingSoldAt ?? now) : null,
     status: input.status,
   };
 }

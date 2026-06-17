@@ -9,16 +9,16 @@ type SectionHeaderProps = {
   title: ReactNode;
 };
 
-export function SectionHeader({
+export const SectionHeader = ({
   action,
   className,
   description,
   title,
-}: SectionHeaderProps) {
+}: SectionHeaderProps) => {
   return (
     <div
       className={cn(
-        "flex flex-wrap items-end justify-between gap-5 border-b border-hairline pb-4",
+        "border-hairline flex flex-wrap items-end justify-between gap-5 border-b pb-4",
         className,
       )}
     >
@@ -27,7 +27,7 @@ export function SectionHeader({
           {title}
         </h2>
         {description ? (
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          <p className="text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed">
             {description}
           </p>
         ) : null}
@@ -35,4 +35,4 @@ export function SectionHeader({
       {action ? <div className="shrink-0">{action}</div> : null}
     </div>
   );
-}
+};

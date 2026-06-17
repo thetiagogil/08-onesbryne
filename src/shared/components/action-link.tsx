@@ -8,16 +8,16 @@ type ActionLinkProps = ComponentPropsWithoutRef<typeof Link> & {
   icon?: ReactNode;
 };
 
-export function ActionLink({
+export const ActionLink = ({
   children,
   className,
   icon,
   ...props
-}: ActionLinkProps) {
+}: ActionLinkProps) => {
   return (
     <Link
       className={cn(
-        "flex min-h-13 items-center gap-2 border border-hairline px-6 py-4 text-[11px] tracking-eyebrow uppercase transition-colors hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:outline-none",
+        "border-hairline tracking-eyebrow hover:border-accent hover:text-accent focus-visible:border-accent flex min-h-13 items-center gap-2 border px-6 py-4 text-[11px] uppercase transition-colors focus-visible:outline-none",
         className,
       )}
       {...props}
@@ -26,4 +26,4 @@ export function ActionLink({
       {children}
     </Link>
   );
-}
+};

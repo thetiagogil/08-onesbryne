@@ -1,6 +1,6 @@
 import type { Piece, PieceStatus } from "@/shared/types";
 
-export function getPieceStatusCounts(pieces: Piece[]) {
+export const getPieceStatusCounts = (pieces: Piece[]) => {
   return pieces.reduce(
     (acc, piece) => {
       acc[piece.status] += 1;
@@ -14,4 +14,4 @@ export function getPieceStatusCounts(pieces: Piece[]) {
       sold: 0,
     } satisfies Record<PieceStatus, number>,
   );
-}
+};

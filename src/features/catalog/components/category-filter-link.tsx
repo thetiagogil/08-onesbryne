@@ -11,13 +11,13 @@ type CategoryFilterLinkProps = {
   sort: CatalogSort;
 };
 
-export function CategoryFilterLink({
+export const CategoryFilterLink = ({
   active,
   label,
   query,
   slug,
   sort,
-}: CategoryFilterLinkProps) {
+}: CategoryFilterLinkProps) => {
   const href = buildCatalogHref({
     category: slug,
     query,
@@ -28,12 +28,12 @@ export function CategoryFilterLink({
     <Link
       className={
         active
-          ? "border border-foreground bg-foreground px-4 py-2 text-[11px] tracking-eyebrow text-background uppercase"
-          : "border border-hairline px-4 py-2 text-[11px] tracking-eyebrow text-muted-foreground uppercase transition-colors hover:border-accent hover:text-foreground"
+          ? "border-foreground bg-foreground tracking-eyebrow text-background border px-4 py-2 text-[11px] uppercase"
+          : "border-hairline tracking-eyebrow text-muted-foreground hover:border-accent hover:text-foreground border px-4 py-2 text-[11px] uppercase transition-colors"
       }
       href={href}
     >
       {label}
     </Link>
   );
-}
+};

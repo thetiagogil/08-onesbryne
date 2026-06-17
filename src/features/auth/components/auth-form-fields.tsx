@@ -15,7 +15,7 @@ type AuthFormFieldsProps = {
   pending: boolean;
 };
 
-export function AuthFormFields({
+export const AuthFormFields = ({
   confirmPassword,
   displayName,
   email,
@@ -26,7 +26,7 @@ export function AuthFormFields({
   onPasswordChange,
   password,
   pending,
-}: AuthFormFieldsProps) {
+}: AuthFormFieldsProps) => {
   return (
     <>
       {isSignup ? (
@@ -85,4 +85,4 @@ export function AuthFormFields({
       ) : null}
     </>
   );
-}
+};

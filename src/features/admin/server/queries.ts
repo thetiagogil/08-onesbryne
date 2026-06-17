@@ -40,7 +40,7 @@ const adminPieceSelect = `
   )
 `;
 
-export async function getAdminPieces(): Promise<Piece[]> {
+export const getAdminPieces = async (): Promise<Piece[]> => {
   noStore();
 
   const client = await createClient();
@@ -54,9 +54,9 @@ export async function getAdminPieces(): Promise<Piece[]> {
   }
 
   return (data as PieceWithImagesRow[]).map((row) => mapPiece(client, row));
-}
+};
 
-export async function getAdminPiece(pieceId: string): Promise<Piece | null> {
+export const getAdminPiece = async (pieceId: string): Promise<Piece | null> => {
   noStore();
 
   const client = await createClient();
@@ -71,4 +71,4 @@ export async function getAdminPiece(pieceId: string): Promise<Piece | null> {
   }
 
   return data ? mapPiece(client, data as PieceWithImagesRow) : null;
-}
+};

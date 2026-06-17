@@ -9,10 +9,8 @@ export const protectedNavLinks = [
   { href: "/account", label: "Account" },
 ] as const;
 
-export const adminNavLinks = [
-  { href: "/admin", label: "Admin" },
-] as const;
+export const adminNavLinks = [{ href: "/admin", label: "Admin" }] as const;
 
-export function isNavLinkActive(pathname: string, href: string) {
+export const isNavLinkActive = (pathname: string, href: string) => {
   return pathname === href || pathname.startsWith(`${href}/`);
-}
+};

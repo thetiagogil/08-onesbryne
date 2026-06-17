@@ -22,11 +22,11 @@ type ProductDetailViewProps = {
   piece: Piece;
 };
 
-export function ProductDetailView({
+export const ProductDetailView = ({
   isFavourite,
   isSignedIn,
   piece,
-}: ProductDetailViewProps) {
+}: ProductDetailViewProps) => {
   const subject = `Inquiry - ${piece.code} ${piece.name}`;
   const body = [
     "Hello,",
@@ -54,18 +54,18 @@ export function ProductDetailView({
 
         <div className="self-start lg:sticky lg:top-24">
           <div className="flex flex-wrap items-center gap-3">
-            <p className="text-[11px] tracking-eyebrow text-muted-foreground uppercase">
+            <p className="tracking-eyebrow text-muted-foreground text-[11px] uppercase">
               {piece.code}
             </p>
             {piece.status !== "available" ? (
               <Badge tone="accent">{formatPieceStatus(piece.status)}</Badge>
             ) : null}
           </div>
-          <h1 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
+          <h1 className="font-display mt-3 text-4xl leading-tight md:text-5xl">
             {piece.name}
           </h1>
           {piece.brand ? (
-            <p className="mt-2 text-sm text-muted-foreground">{piece.brand}</p>
+            <p className="text-muted-foreground mt-2 text-sm">{piece.brand}</p>
           ) : null}
 
           <div className="mt-8 flex items-baseline gap-4">
@@ -74,7 +74,7 @@ export function ProductDetailView({
             </p>
           </div>
 
-          <dl className="mt-10 divide-y divide-hairline border-y border-hairline text-sm">
+          <dl className="divide-hairline border-hairline mt-10 divide-y border-y text-sm">
             <ProductDetailRow
               label="Size"
               value={formatPieceSize(piece.size)}
@@ -96,7 +96,7 @@ export function ProductDetailView({
             />
           </dl>
 
-          <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
+          <p className="text-muted-foreground mt-8 text-sm leading-relaxed">
             {piece.description}
           </p>
 
@@ -106,7 +106,7 @@ export function ProductDetailView({
                 <a href={mailto}>Inquire by email</a>
               </Button>
             ) : (
-              <div className="border border-hairline px-6 py-4 text-center text-[11px] tracking-eyebrow text-muted-foreground uppercase">
+              <div className="border-hairline tracking-eyebrow text-muted-foreground border px-6 py-4 text-center text-[11px] uppercase">
                 This piece is no longer available
               </div>
             )}
@@ -118,7 +118,7 @@ export function ProductDetailView({
             />
           </div>
 
-          <p className="mt-8 text-xs leading-relaxed text-muted-foreground">
+          <p className="text-muted-foreground mt-8 text-xs leading-relaxed">
             Each piece is one of one. Payment, shipping and pickup are
             coordinated personally with the seller.
           </p>
@@ -126,4 +126,4 @@ export function ProductDetailView({
       </div>
     </section>
   );
-}
+};

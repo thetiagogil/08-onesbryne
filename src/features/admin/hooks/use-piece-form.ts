@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  type FormEvent,
-  useActionState,
-  useState,
-  useTransition,
-} from "react";
+import { type FormEvent, useActionState, useState, useTransition } from "react";
 
 import {
   PIECE_IMAGE_FILE_FIELD,
@@ -28,7 +23,7 @@ type UsePieceFormInput = {
   piece?: Piece;
 };
 
-export function usePieceForm({ piece }: UsePieceFormInput) {
+export const usePieceForm = ({ piece }: UsePieceFormInput) => {
   const isCreate = !piece;
   const action = piece
     ? updatePieceAction.bind(null, piece.id)
@@ -36,10 +31,7 @@ export function usePieceForm({ piece }: UsePieceFormInput) {
   const [state, formAction, isActionPending] = useActionState<
     PieceFormState,
     FormData
-  >(
-    action,
-    null,
-  );
+  >(action, null);
   const [localError, setLocalError] = useState<string | null>(null);
   const [isPreparingImage, setIsPreparingImage] = useState(false);
   const [isTransitionPending, startTransition] = useTransition();
@@ -101,4 +93,4 @@ export function usePieceForm({ piece }: UsePieceFormInput) {
     pendingLabel,
     state,
   };
-}
+};

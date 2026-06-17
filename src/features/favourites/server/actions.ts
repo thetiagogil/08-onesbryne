@@ -6,10 +6,10 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { requireAuthUser } from "@/shared/server/auth";
 
-export async function toggleFavouriteAction(
+export const toggleFavouriteAction = async (
   pieceId: string,
   returnPath: string,
-) {
+) => {
   const client = await createClient();
   const user = await requireAuthUser(client);
 
@@ -44,8 +44,8 @@ export async function toggleFavouriteAction(
   revalidatePath("/");
   revalidatePath("/favourites");
   revalidatePath(returnPath);
-}
+};
 
-export async function redirectToAuthForFavourite(returnPath: string) {
+export const redirectToAuthForFavourite = async (returnPath: string) => {
   redirect(`/auth?next=${encodeURIComponent(returnPath)}`);
-}
+};

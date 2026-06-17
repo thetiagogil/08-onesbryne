@@ -9,10 +9,10 @@ import { requireAuthUser } from "@/shared/server/auth";
 
 export type ProfileSettingsState = ActionResult | null;
 
-export async function updateProfileSettingsAction(
+export const updateProfileSettingsAction = async (
   _previousState: ProfileSettingsState,
   formData: FormData,
-): Promise<ProfileSettingsState> {
+): Promise<ProfileSettingsState> => {
   const normalized = normalizeProfileSettingsFormData(formData);
 
   if (!normalized.ok) return normalized;
@@ -33,4 +33,4 @@ export async function updateProfileSettingsAction(
   revalidatePath("/account");
 
   return { ok: true, data: undefined, message: "Profile saved." };
-}
+};

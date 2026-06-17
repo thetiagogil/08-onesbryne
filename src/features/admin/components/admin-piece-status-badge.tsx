@@ -6,12 +6,12 @@ type AdminPieceStatusBadgeProps = {
   status: PieceStatus;
 };
 
-export function AdminPieceStatusBadge({
+export const AdminPieceStatusBadge = ({
   status,
-}: AdminPieceStatusBadgeProps) {
+}: AdminPieceStatusBadgeProps) => {
   if (status === "available" || status === "reserved") {
     return <Badge tone="accent">{formatPieceStatus(status)}</Badge>;
   }
 
   return <Badge>{formatPieceStatus(status)}</Badge>;
-}
+};

@@ -56,16 +56,19 @@ export const defaultAdminPieceFilters: AdminPieceFilters = {
 
 export const defaultAdminPiecePageSize: AdminPiecePageSize = 10;
 
-export function hasActiveAdminPieceFilters(filters: AdminPieceFilters) {
+export const hasActiveAdminPieceFilters = (filters: AdminPieceFilters) => {
   return Boolean(
     filters.category ||
     filters.query ||
     filters.status ||
     filters.sort !== "newest",
   );
-}
+};
 
-export function filterAdminPieces(pieces: Piece[], filters: AdminPieceFilters) {
+export const filterAdminPieces = (
+  pieces: Piece[],
+  filters: AdminPieceFilters,
+) => {
   const searchTerm = filters.query?.trim().toLowerCase();
 
   return sortAdminPieces(
@@ -83,9 +86,9 @@ export function filterAdminPieces(pieces: Piece[], filters: AdminPieceFilters) {
     }),
     filters.sort,
   );
-}
+};
 
-export function normalizeAdminPieceSort(value: string): AdminPieceSort {
+export const normalizeAdminPieceSort = (value: string): AdminPieceSort => {
   switch (value) {
     case "oldest":
     case "updated":
@@ -99,32 +102,34 @@ export function normalizeAdminPieceSort(value: string): AdminPieceSort {
     default:
       return "newest";
   }
-}
+};
 
-export function normalizeAdminPieceStatus(value: string) {
+export const normalizeAdminPieceStatus = (value: string) => {
   return pieceStatuses.find((status) => status === value);
-}
+};
 
-export function normalizeAdminPiecePageSize(value: string): AdminPiecePageSize {
+export const normalizeAdminPiecePageSize = (
+  value: string,
+): AdminPiecePageSize => {
   return value === "10" ? 10 : value === "20" ? 20 : defaultAdminPiecePageSize;
-}
+};
 
-export function getAdminPiecePageCount(
+export const getAdminPiecePageCount = (
   pieces: Piece[],
   pageSize: AdminPiecePageSize,
-) {
+) => {
   return Math.max(1, Math.ceil(pieces.length / pageSize));
-}
+};
 
-export function paginateAdminPieces(
+export const paginateAdminPieces = (
   pieces: Piece[],
   page: number,
   pageSize: AdminPiecePageSize,
-) {
+) => {
   const startIndex = (page - 1) * pageSize;
 
   return pieces.slice(startIndex, startIndex + pageSize);
-}
+};
 
 function sortAdminPieces(pieces: Piece[], sort: AdminPieceSort) {
   return [...pieces].sort((left, right) => {

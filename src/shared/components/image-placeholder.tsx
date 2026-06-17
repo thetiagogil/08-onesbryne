@@ -7,14 +7,14 @@ type ImagePlaceholderProps = {
   label?: string;
 };
 
-export function ImagePlaceholder({
+export const ImagePlaceholder = ({
   className,
   label = "Image pending",
-}: ImagePlaceholderProps) {
+}: ImagePlaceholderProps) => {
   return (
     <div
       className={cn(
-        "flex h-full w-full flex-col items-center justify-center gap-3 bg-surface px-6 text-center text-[11px] tracking-eyebrow text-muted-foreground uppercase",
+        "bg-surface tracking-eyebrow text-muted-foreground flex h-full w-full flex-col items-center justify-center gap-3 px-6 text-center text-[11px] uppercase",
         className,
       )}
     >
@@ -22,4 +22,4 @@ export function ImagePlaceholder({
       <span>{label}</span>
     </div>
   );
-}
+};

@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getSupabaseEnv, isSupabaseConfigured } from "@/lib/env";
 import type { Database } from "@/types/database.types";
 
-export async function updateSession(request: NextRequest) {
+export const updateSession = async (request: NextRequest) => {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set(
     "x-onesbryne-pathname",
@@ -45,4 +45,4 @@ export async function updateSession(request: NextRequest) {
   await supabase.auth.getClaims();
 
   return response;
-}
+};

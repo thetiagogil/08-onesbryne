@@ -23,7 +23,7 @@ export default async function AboutPage() {
           }
         />
 
-        <div className="mt-16 space-y-8 text-base leading-relaxed text-muted-foreground">
+        <div className="text-muted-foreground mt-16 space-y-8 text-base leading-relaxed">
           <p>
             Onesbryne is a private catalog of selected pieces. It is a place to
             discover and acquire unique items that speak to you. Each piece is
@@ -35,7 +35,7 @@ export default async function AboutPage() {
           </p>
         </div>
 
-        <div className="mt-16 border-t border-hairline pt-12">
+        <div className="border-hairline mt-16 border-t pt-12">
           <Button asChild variant="outline">
             <a href={`mailto:${SELLER_EMAIL}`}>{SELLER_EMAIL}</a>
           </Button>

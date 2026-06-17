@@ -14,7 +14,7 @@ import type {
 } from "@/shared/types";
 import type { AppSupabaseClient } from "@/lib/supabase/schemas";
 
-export function mapProfile(row: ProfileRow): Profile {
+export const mapProfile = (row: ProfileRow): Profile => {
   return {
     appRole: row.app_role === "admin" ? "admin" : "customer",
     createdAt: row.created_at,
@@ -22,31 +22,31 @@ export function mapProfile(row: ProfileRow): Profile {
     id: row.id,
     updatedAt: row.updated_at,
   };
-}
+};
 
-export function mapCategory(row: CategoryRow): Category {
+export const mapCategory = (row: CategoryRow): Category => {
   return {
     isActive: row.is_active,
     label: row.label,
     slug: row.slug,
     sortOrder: row.sort_order,
   };
-}
+};
 
-export function mapCategorySizeOption(
+export const mapCategorySizeOption = (
   row: CategorySizeOptionRow,
-): CategorySizeOption {
+): CategorySizeOption => {
   return {
     categorySlug: row.category_slug,
     size: row.size,
     sortOrder: row.sort_order,
   };
-}
+};
 
-export function mapPiece(
+export const mapPiece = (
   client: AppSupabaseClient,
   row: PieceRow & { piece_images?: PieceImageRow[] | null },
-): Piece {
+): Piece => {
   return {
     brand: row.brand,
     categorySlug: row.category_slug,
@@ -67,16 +67,15 @@ export function mapPiece(
     status: normalizePieceStatus(row.status),
     updatedAt: row.updated_at,
   };
-}
+};
 
 export function mapPieceImage(
   client: AppSupabaseClient,
   row: PieceImageRow,
 ): PieceImage {
   const bucket = row.storage_bucket || PIECE_IMAGE_BUCKET;
-  const publicUrl = client.storage
-    .from(bucket)
-    .getPublicUrl(row.storage_path).data.publicUrl;
+  const publicUrl = client.storage.from(bucket).getPublicUrl(row.storage_path)
+    .data.publicUrl;
 
   return {
     altText: row.alt_text,

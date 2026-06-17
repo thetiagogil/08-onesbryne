@@ -4,29 +4,26 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { PublicMobileMenuLink } from "@/shared/components/layout/public-mobile-menu-link";
-import {
-  isNavLinkActive,
-  publicNavLinks,
-} from "@/shared/constants/navigation";
+import { isNavLinkActive, publicNavLinks } from "@/shared/constants/navigation";
 
 type PublicMobileMenuProps = {
   isAdmin: boolean;
 };
 
-export function PublicMobileMenu({ isAdmin }: PublicMobileMenuProps) {
+export const PublicMobileMenu = ({ isAdmin }: PublicMobileMenuProps) => {
   const pathname = usePathname();
 
   return (
     <details className="group md:hidden">
       <summary
         aria-label="Menu"
-        className="flex cursor-pointer list-none text-foreground transition-colors hover:text-accent [&::-webkit-details-marker]:hidden"
+        className="text-foreground hover:text-accent flex cursor-pointer list-none transition-colors [&::-webkit-details-marker]:hidden"
       >
         <Menu className="size-4 group-open:hidden" />
         <X className="hidden size-4 group-open:block" />
       </summary>
 
-      <div className="absolute inset-x-0 top-16 border-t border-hairline bg-background px-6 py-4">
+      <div className="border-hairline bg-background absolute inset-x-0 top-16 border-t px-6 py-4">
         <nav className="flex flex-col gap-4">
           {publicNavLinks.map((link) => (
             <PublicMobileMenuLink
@@ -50,4 +47,4 @@ export function PublicMobileMenu({ isAdmin }: PublicMobileMenuProps) {
       </div>
     </details>
   );
-}
+};

@@ -12,10 +12,5 @@ export default async function AdminPiecesPage() {
     getAdminPieces(),
   ]);
 
-  return (
-    <AdminPiecesPageView
-      categories={categories}
-      pieces={pieces}
-    />
-  );
+  return <AdminPiecesPageView categories={categories} pieces={pieces} />;
 }

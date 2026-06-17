@@ -27,18 +27,20 @@ type CatalogFiltersProps = {
   sizes: PieceSize[];
 };
 
-export function CatalogFilters({
+export const CatalogFilters = ({
   categories,
   currentCategory,
   currentSize,
   query,
   sort,
   sizes,
-}: CatalogFiltersProps) {
+}: CatalogFiltersProps) => {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [searchValue, setSearchValue] = useState(query ?? "");
-  const hasFilters = Boolean(currentCategory || currentSize || query || sort !== "newest");
+  const hasFilters = Boolean(
+    currentCategory || currentSize || query || sort !== "newest",
+  );
   const sizeOptions = [
     { label: "All", value: "" },
     ...sizes.map((size) => ({
@@ -117,7 +119,7 @@ export function CatalogFilters({
         </div>
       </section>
 
-      <section className="sticky top-16 z-30 border-y border-hairline bg-background/90 backdrop-blur-md">
+      <section className="border-hairline bg-background/90 sticky top-16 z-30 border-y backdrop-blur-md">
         <div className="mx-auto grid max-w-400 gap-x-6 gap-y-4 px-4 py-4 sm:grid-cols-2 md:px-6 lg:grid-cols-[minmax(8rem,10rem)_minmax(9rem,11rem)_minmax(16rem,1fr)_auto_auto] lg:items-end lg:px-10">
           <FormField htmlFor="size" label="Size">
             <Select
@@ -157,7 +159,7 @@ export function CatalogFilters({
               value={searchValue}
             />
           </FormField>
-          <div className="flex min-h-11 items-center gap-2 text-[11px] tracking-eyebrow text-muted-foreground uppercase">
+          <div className="tracking-eyebrow text-muted-foreground flex min-h-11 items-center gap-2 text-[11px] uppercase">
             <Search />
             {pending ? "Updating" : "Instant"}
           </div>
@@ -174,4 +176,4 @@ export function CatalogFilters({
       </section>
     </>
   );
-}
+};
