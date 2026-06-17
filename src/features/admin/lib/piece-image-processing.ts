@@ -58,11 +58,11 @@ export const toCompressedPieceImageFile = (
   });
 };
 
-function canvasToBlob(
+const canvasToBlob = (
   canvas: HTMLCanvasElement,
   type: string,
   quality: number,
-) {
+) => {
   return new Promise<Blob>((resolve, reject) => {
     canvas.toBlob(
       (blob) => {
@@ -77,9 +77,9 @@ function canvasToBlob(
       quality,
     );
   });
-}
+};
 
-function getImageBaseName(fileName: string) {
+const getImageBaseName = (fileName: string) => {
   return (
     fileName
       .replace(/\.[^.]+$/, "")
@@ -88,10 +88,10 @@ function getImageBaseName(fileName: string) {
       .toLowerCase()
       .slice(0, 48) || "piece"
   );
-}
+};
 
-function isAcceptedPieceImageMimeType(
+const isAcceptedPieceImageMimeType = (
   value: string,
-): value is PieceImageMimeType {
+): value is PieceImageMimeType => {
   return ACCEPTED_PIECE_IMAGE_MIME_TYPES.includes(value as PieceImageMimeType);
-}
+};

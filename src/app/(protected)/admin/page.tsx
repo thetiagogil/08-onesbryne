@@ -1,4 +1,4 @@
-import { AdminPiecesPageView } from "@/features/admin/components/admin-pieces-page-view";
+import { AdminPiecesPageView } from "@/app/(protected)/admin/_components/admin-pieces-page-view";
 import { getAdminPieces } from "@/features/admin/server/queries";
 import { getActiveCategories } from "@/features/catalog/server/queries";
 import { requireAdmin } from "@/shared/server/auth";

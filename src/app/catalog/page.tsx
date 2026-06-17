@@ -1,4 +1,4 @@
-import { CatalogPageView } from "@/features/catalog/components/catalog-page-view";
+import { CatalogPageView } from "@/app/catalog/_components/catalog-page-view";
 import { getCatalogData } from "@/features/catalog/server/queries";
 import { normalizeQueryParam } from "@/features/catalog/lib/format";
 import { normalizeCatalogSort } from "@/features/catalog/lib/catalog-routing";

@@ -1,5 +1,5 @@
-import { CatalogPageView } from "@/features/catalog/components/catalog-page-view";
-import { StorefrontPage } from "@/features/catalog/components/storefront-page";
+import { StorefrontPage } from "@/app/_components/storefront-page";
+import { CatalogPageView } from "@/app/catalog/_components/catalog-page-view";
 import {
   getCatalogData,
   getStorefrontData,

@@ -12,7 +12,7 @@ export const usePieceImagePreview = () => {
   const [preview, setPreview] = useState<PieceImagePreview | null>(null);
   const objectUrlRef = useRef<string | null>(null);
 
-  function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     if (objectUrlRef.current) {
@@ -32,7 +32,7 @@ export const usePieceImagePreview = () => {
       sizeLabel: formatFileSize(file.size),
       url: objectUrl,
     });
-  }
+  };
 
   useEffect(
     () => () => {
@@ -46,8 +46,8 @@ export const usePieceImagePreview = () => {
   return { handleImageChange, preview };
 };
 
-function formatFileSize(bytes: number) {
+const formatFileSize = (bytes: number) => {
   if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
 
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
-}
+};

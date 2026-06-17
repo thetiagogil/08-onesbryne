@@ -38,7 +38,7 @@ export const useAdminImageManager = ({
   });
   const [deletePending, startDeleteTransition] = useTransition();
 
-  async function uploadSelectedFile(files: FileList | null) {
+  const uploadSelectedFile = async (files: FileList | null) => {
     const file = files?.[0];
     if (!file) return;
 
@@ -92,24 +92,20 @@ export const useAdminImageManager = ({
     }
 
     setState({ error: null, pending: false });
-  }
+  };
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     void uploadSelectedFile(event.target.files);
-  }
+  };
 
-  function openFileDialog() {
+  const openFileDialog = () => {
     inputRef.current?.click();
-  }
+  };
 
-  function deleteImage(image: PieceImage) {
+  const deleteImage = (image: PieceImage) => {
     startDeleteTransition(async () => {
       setState((current) => ({ ...current, error: null }));
-      const result = await deletePieceImageAction(
-        pieceId,
-        image.id,
-        image.storagePath,
-      );
+      const result = await deletePieceImageAction(pieceId, image.id);
 
       if (!result.ok) {
         setState((current) => ({
@@ -121,7 +117,7 @@ export const useAdminImageManager = ({
 
       router.refresh();
     });
-  }
+  };
 
   return {
     deleteImage,

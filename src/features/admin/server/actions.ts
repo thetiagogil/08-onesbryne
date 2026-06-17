@@ -214,10 +214,24 @@ export const addPieceImageAction = async (
 export const deletePieceImageAction = async (
   pieceId: string,
   imageId: string,
-  storagePath: string,
 ): Promise<ActionResult> => {
   const client = await createClient();
   await requireAdminAuthUser(client);
+
+  const { data: image, error: imageError } = await client
+    .from("piece_images")
+    .select("id, storage_path")
+    .eq("id", imageId)
+    .eq("piece_id", pieceId)
+    .maybeSingle();
+
+  if (imageError) {
+    return { ok: false, error: imageError.message };
+  }
+
+  if (!image) {
+    return { ok: false, error: "Image not found." };
+  }
 
   const { count, error: countError } = await client
     .from("piece_images")
@@ -235,14 +249,6 @@ export const deletePieceImageAction = async (
     };
   }
 
-  const { error: storageError } = await client.storage
-    .from(PIECE_IMAGE_BUCKET)
-    .remove([storagePath]);
-
-  if (storageError) {
-    return { ok: false, error: storageError.message };
-  }
-
   const { error } = await client
     .from("piece_images")
     .delete()
@@ -253,19 +259,29 @@ export const deletePieceImageAction = async (
     return { ok: false, error: error.message };
   }
 
+  const { error: storageError } = await client.storage
+    .from(PIECE_IMAGE_BUCKET)
+    .remove([image.storage_path]);
+
   revalidateAdminSurfaces();
   revalidatePath(`/admin/pieces/${pieceId}/edit`);
 
-  return { ok: true, data: undefined };
+  return {
+    ok: true,
+    data: undefined,
+    message: storageError
+      ? `Image removed, but storage cleanup failed: ${storageError.message}`
+      : undefined,
+  };
 };
 
-function toPieceWrite(
+const toPieceWrite = (
   input: PieceFormInput,
   existing?: {
     existingPublishedAt: string | null;
     existingSoldAt: string | null;
   },
-) {
+) => {
   const now = new Date().toISOString();
 
   return {
@@ -283,18 +299,18 @@ function toPieceWrite(
     sold_at: input.status === "sold" ? (existing?.existingSoldAt ?? now) : null,
     status: input.status,
   };
-}
+};
 
-function revalidateAdminSurfaces() {
+const revalidateAdminSurfaces = () => {
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath("/admin/pieces");
-}
+};
 
-async function ensureCategorySizeAllowed(
+const ensureCategorySizeAllowed = async (
   client: ServerSupabaseClient,
   input: PieceFormInput,
-): Promise<ActionResult> {
+): Promise<ActionResult> => {
   const { data, error } = await client
     .from("category_size_options")
     .select("size")
@@ -314,7 +330,7 @@ async function ensureCategorySizeAllowed(
   }
 
   return { ok: true, data: undefined };
-}
+};
 
 type PieceImageMetadataInput = {
   altText?: string | null;
@@ -327,10 +343,10 @@ type PieceImageMetadataInput = {
   width: number | null;
 };
 
-async function insertPieceImageMetadata(
+const insertPieceImageMetadata = async (
   client: ServerSupabaseClient,
   input: PieceImageMetadataInput,
-): Promise<ActionResult<{ id: string }>> {
+): Promise<ActionResult<{ id: string }>> => {
   const { data, error } = await client
     .from("piece_images")
     .insert({
@@ -352,13 +368,13 @@ async function insertPieceImageMetadata(
   }
 
   return { ok: true, data: { id: data.id } };
-}
+};
 
-async function rollbackCreatedPiece(
+const rollbackCreatedPiece = async (
   client: ServerSupabaseClient,
   pieceId: string,
   storagePath?: string,
-) {
+) => {
   const errors: string[] = [];
 
   if (storagePath) {
@@ -373,10 +389,10 @@ async function rollbackCreatedPiece(
   if (error) errors.push(error.message);
 
   return errors;
-}
+};
 
-function withRollbackMessage(error: string, rollbackErrors: string[]) {
+const withRollbackMessage = (error: string, rollbackErrors: string[]) => {
   if (!rollbackErrors.length) return error;
 
   return `${error} Rollback failed: ${rollbackErrors.join(" ")}`;
-}
+};

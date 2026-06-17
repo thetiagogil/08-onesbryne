@@ -1,4 +1,4 @@
-import { AccountPageView } from "@/features/settings/components/account-page-view";
+import { AccountPageView } from "@/app/(protected)/account/_components/account-page-view";
 import { getFavouritePieceIds } from "@/features/catalog/server/queries";
 import { requireUser } from "@/shared/server/auth";
 

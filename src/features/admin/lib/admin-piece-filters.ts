@@ -131,7 +131,7 @@ export const paginateAdminPieces = (
   return pieces.slice(startIndex, startIndex + pageSize);
 };
 
-function sortAdminPieces(pieces: Piece[], sort: AdminPieceSort) {
+const sortAdminPieces = (pieces: Piece[], sort: AdminPieceSort) => {
   return [...pieces].sort((left, right) => {
     switch (sort) {
       case "oldest":
@@ -157,4 +157,4 @@ function sortAdminPieces(pieces: Piece[], sort: AdminPieceSort) {
         return right.createdAt.localeCompare(left.createdAt);
     }
   });
-}
+};

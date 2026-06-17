@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import { safeRedirectPath } from "@/lib/routing/redirect";
 import { createClient } from "@/lib/supabase/server";
 import { requireAuthUser } from "@/shared/server/auth";
 
@@ -12,6 +13,7 @@ export const toggleFavouriteAction = async (
 ) => {
   const client = await createClient();
   const user = await requireAuthUser(client);
+  const safeReturnPath = safeRedirectPath(returnPath, "/");
 
   const { data: existing, error: readError } = await client
     .from("favourites")
@@ -43,9 +45,11 @@ export const toggleFavouriteAction = async (
 
   revalidatePath("/");
   revalidatePath("/favourites");
-  revalidatePath(returnPath);
+  revalidatePath(safeReturnPath);
 };
 
 export const redirectToAuthForFavourite = async (returnPath: string) => {
-  redirect(`/auth?next=${encodeURIComponent(returnPath)}`);
+  redirect(
+    `/auth?next=${encodeURIComponent(safeRedirectPath(returnPath, "/"))}`,
+  );
 };

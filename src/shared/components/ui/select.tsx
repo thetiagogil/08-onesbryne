@@ -57,7 +57,7 @@ export const Select = ({
   const [internalValue, setInternalValue] = React.useState(defaultValue);
   const selectedValue = isControlled ? value : internalValue;
 
-  function handleValueChange(nextValue: string) {
+  const handleValueChange = (nextValue: string) => {
     const normalizedValue = fromRadixSelectValue(nextValue);
 
     if (!isControlled) {
@@ -65,7 +65,7 @@ export const Select = ({
     }
 
     onValueChange?.(normalizedValue);
-  }
+  };
 
   return (
     <SelectPrimitive.Root

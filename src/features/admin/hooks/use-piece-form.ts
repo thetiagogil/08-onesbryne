@@ -43,7 +43,7 @@ export const usePieceForm = ({ piece }: UsePieceFormInput) => {
       ? "Saving piece"
       : "Creating piece";
 
-  async function handleCreateSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleCreateSubmit = async (event: FormEvent<HTMLFormElement>) => {
     if (!isCreate) return;
 
     event.preventDefault();
@@ -82,7 +82,7 @@ export const usePieceForm = ({ piece }: UsePieceFormInput) => {
     } finally {
       setIsPreparingImage(false);
     }
-  }
+  };
 
   return {
     action: isCreate ? undefined : formAction,

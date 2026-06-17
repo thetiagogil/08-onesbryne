@@ -69,10 +69,10 @@ export const mapPiece = (
   };
 };
 
-export function mapPieceImage(
+export const mapPieceImage = (
   client: AppSupabaseClient,
   row: PieceImageRow,
-): PieceImage {
+): PieceImage => {
   const bucket = row.storage_bucket || PIECE_IMAGE_BUCKET;
   const publicUrl = client.storage.from(bucket).getPublicUrl(row.storage_path)
     .data.publicUrl;
@@ -89,9 +89,9 @@ export function mapPieceImage(
     storagePath: row.storage_path,
     width: row.width,
   };
-}
+};
 
-function normalizePieceStatus(value: string): PieceStatus {
+const normalizePieceStatus = (value: string): PieceStatus => {
   switch (value) {
     case "draft":
     case "available":
@@ -102,4 +102,4 @@ function normalizePieceStatus(value: string): PieceStatus {
     default:
       return "draft";
   }
-}
+};

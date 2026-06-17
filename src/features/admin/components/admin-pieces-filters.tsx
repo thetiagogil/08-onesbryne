@@ -46,37 +46,37 @@ export const AdminPiecesFilters = ({
     })),
   ];
 
-  function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     onFiltersChange({
       ...filters,
       query: event.target.value || undefined,
     });
-  }
+  };
 
-  function handleStatusChange(value: string) {
+  const handleStatusChange = (value: string) => {
     onFiltersChange({
       ...filters,
       status: normalizeAdminPieceStatus(value),
     });
-  }
+  };
 
-  function handleCategoryChange(value: string) {
+  const handleCategoryChange = (value: string) => {
     onFiltersChange({
       ...filters,
       category: value || undefined,
     });
-  }
+  };
 
-  function handleSortChange(value: string) {
+  const handleSortChange = (value: string) => {
     onFiltersChange({
       ...filters,
       sort: normalizeAdminPieceSort(value),
     });
-  }
+  };
 
-  function handlePageSizeChange(value: string) {
+  const handlePageSizeChange = (value: string) => {
     onPageSizeChange(normalizeAdminPiecePageSize(value));
-  }
+  };
 
   return (
     <div className="mt-10 grid gap-5 py-5 md:grid-cols-[minmax(0,1fr)_repeat(4,minmax(8rem,11rem))_auto] md:items-end">

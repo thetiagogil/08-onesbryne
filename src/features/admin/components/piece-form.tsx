@@ -61,7 +61,7 @@ export const PieceForm = ({
     ...pieceConditionOptions,
   ];
 
-  function handleCategoryChange(nextCategorySlug: string) {
+  const handleCategoryChange = (nextCategorySlug: string) => {
     const nextSizeOptions = getPieceFormSizeOptions(
       categorySizeOptions,
       nextCategorySlug,
@@ -73,11 +73,11 @@ export const PieceForm = ({
         ? currentSize
         : (nextSizeOptions[0]?.value ?? ""),
     );
-  }
+  };
 
-  function handleSizeChange(nextSize: string) {
+  const handleSizeChange = (nextSize: string) => {
     setSize(isPieceSize(nextSize) ? nextSize : "");
-  }
+  };
 
   return (
     <form

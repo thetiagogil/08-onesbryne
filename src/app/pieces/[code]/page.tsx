@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { ProductDetailView } from "@/features/catalog/components/product-detail-view";
+import { ProductDetailView } from "@/app/pieces/[code]/_components/product-detail-view";
 import { normalizeCode } from "@/features/catalog/lib/format";
 import {
   getFavouritePieceIds,

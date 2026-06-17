@@ -44,8 +44,8 @@ export const normalizeAuthMode = (value: string | undefined): AuthMode => {
   return value === "signup" ? "signup" : "login";
 };
 
-function isAuthPathname(value: string) {
+const isAuthPathname = (value: string) => {
   const pathname = value.split(/[?#]/, 1)[0] ?? value;
 
   return authRoutePathnames.has(pathname) || pathname.startsWith("/auth/");
-}
+};

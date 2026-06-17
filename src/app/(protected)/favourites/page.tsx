@@ -1,4 +1,4 @@
-import { FavouritesPageView } from "@/features/favourites/components/favourites-page-view";
+import { FavouritesPageView } from "@/app/(protected)/favourites/_components/favourites-page-view";
 import { getFavouritePieces } from "@/features/catalog/server/queries";
 import { SetupMissing } from "@/shared/components/setup-missing";
 import { requireUser } from "@/shared/server/auth";

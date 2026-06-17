@@ -266,7 +266,7 @@ export const getFavouritePieces = async (userId: string) => {
   return { configured: true, pieces };
 };
 
-export async function getActiveCategories(): Promise<Category[]> {
+export const getActiveCategories = async (): Promise<Category[]> => {
   if (!isSupabaseConfigured()) return [];
 
   const client = await createClient();
@@ -282,11 +282,11 @@ export async function getActiveCategories(): Promise<Category[]> {
   }
 
   return (data as CategoryRow[]).map(mapCategory);
-}
+};
 
-export async function getCategorySizeOptions(
+export const getCategorySizeOptions = async (
   categorySlug?: string,
-): Promise<CategorySizeOption[]> {
+): Promise<CategorySizeOption[]> => {
   if (!isSupabaseConfigured()) return [];
 
   const client = await createClient();
@@ -308,9 +308,9 @@ export async function getCategorySizeOptions(
   }
 
   return (data as CategorySizeOptionRow[]).map(mapCategorySizeOption);
-}
+};
 
-export async function getAvailableSizes(): Promise<PieceSize[]> {
+export const getAvailableSizes = async (): Promise<PieceSize[]> => {
   if (!isSupabaseConfigured()) return [];
 
   const client = await createClient();
@@ -327,4 +327,4 @@ export async function getAvailableSizes(): Promise<PieceSize[]> {
   return sortPieceSizes(
     Array.from(new Set(data.map((row) => row.size_label).filter(Boolean))),
   );
-}
+};

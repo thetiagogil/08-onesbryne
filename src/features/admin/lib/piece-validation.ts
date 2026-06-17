@@ -85,9 +85,9 @@ export const normalizePieceFormData = (
   };
 };
 
-export function isPieceStatus(value: string): value is PieceStatus {
+export const isPieceStatus = (value: string): value is PieceStatus => {
   return pieceStatuses.includes(value as PieceStatus);
-}
+};
 
 export const normalizeCreatePieceImageFormData = (
   formData: FormData,
@@ -118,26 +118,26 @@ export const normalizeCreatePieceImageFormData = (
   };
 };
 
-export function isAcceptedPieceImageMimeType(
+export const isAcceptedPieceImageMimeType = (
   value: string,
-): value is PieceImageMimeType {
+): value is PieceImageMimeType => {
   return ACCEPTED_PIECE_IMAGE_MIME_TYPES.includes(value as PieceImageMimeType);
-}
+};
 
-function readString(formData: FormData, key: string) {
+const readString = (formData: FormData, key: string) => {
   const value = formData.get(key);
   return typeof value === "string" ? value.trim() : "";
-}
+};
 
-function readOptionalString(formData: FormData, key: string) {
+const readOptionalString = (formData: FormData, key: string) => {
   const value = readString(formData, key);
   return value || null;
-}
+};
 
-function readOptionalPositiveInteger(formData: FormData, key: string) {
+const readOptionalPositiveInteger = (formData: FormData, key: string) => {
   const value = readString(formData, key);
   if (!value) return null;
 
   const number = Number(value);
   return Number.isSafeInteger(number) && number > 0 ? number : null;
-}
+};

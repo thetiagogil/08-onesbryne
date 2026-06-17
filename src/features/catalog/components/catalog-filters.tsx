@@ -71,11 +71,11 @@ export const CatalogFilters = ({
     return () => window.clearTimeout(timeout);
   }, [currentCategory, currentSize, query, router, searchValue, sort]);
 
-  function updateCatalogUrl(next: {
+  const updateCatalogUrl = (next: {
     query?: string;
     size?: string;
     sort?: CatalogSort;
-  }) {
+  }) => {
     startTransition(() => {
       router.replace(
         buildCatalogHref({
@@ -88,13 +88,13 @@ export const CatalogFilters = ({
         { scroll: false },
       );
     });
-  }
+  };
 
-  function clearCatalogFilters() {
+  const clearCatalogFilters = () => {
     startTransition(() => {
       router.replace("/catalog", { scroll: false });
     });
-  }
+  };
 
   return (
     <>

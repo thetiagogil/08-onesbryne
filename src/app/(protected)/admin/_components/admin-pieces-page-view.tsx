@@ -61,28 +61,28 @@ export const AdminPiecesPageView = ({
   );
   const hasFilters = hasActiveAdminPieceFilters(filters);
 
-  function handleFiltersChange(nextFilters: AdminPieceFilters) {
+  const handleFiltersChange = (nextFilters: AdminPieceFilters) => {
     setFilters(nextFilters);
     setPage(1);
-  }
+  };
 
-  function handleClearFilters() {
+  const handleClearFilters = () => {
     setFilters(defaultAdminPieceFilters);
     setPage(1);
-  }
+  };
 
-  function handlePageSizeChange(nextPageSize: AdminPiecePageSize) {
+  const handlePageSizeChange = (nextPageSize: AdminPiecePageSize) => {
     setPageSize(nextPageSize);
     setPage(1);
-  }
+  };
 
-  function handlePreviousPage() {
+  const handlePreviousPage = () => {
     setPage((current) => Math.max(1, current - 1));
-  }
+  };
 
-  function handleNextPage() {
+  const handleNextPage = () => {
     setPage((current) => Math.min(pageCount, current + 1));
-  }
+  };
 
   return (
     <section className="mx-auto max-w-400 px-4 py-16 md:px-6 lg:px-10">
