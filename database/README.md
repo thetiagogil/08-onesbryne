@@ -41,10 +41,8 @@ for linked or remote tooling. Use the tracked example files as key inventories;
 never commit either private file or expose private values through
 `NEXT_PUBLIC_*` variables.
 
-The canonical database variable names are the generic `SUPABASE_*` names in
-`.env.database.example`. The wrapper temporarily accepts the former
-`SUPABASE_ONESBRYNE_*` names for migration compatibility, but new setup should
-use only the canonical names.
+The only accepted database variable names are the generic `SUPABASE_*` names
+listed in `.env.database.example`.
 
 ## Commands And Verification
 

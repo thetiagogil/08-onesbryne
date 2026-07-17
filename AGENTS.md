@@ -27,7 +27,8 @@ environment, and authorization boundary before changing or running anything.
   `database/`.
 - Keep browser-safe application values in `.env.local` and private database
   tooling values in `.env.database`. Start from the corresponding tracked
-  example and do not move private credentials into `NEXT_PUBLIC_*` variables.
+  example, use only its generic `SUPABASE_*` names, and do not move private
+  credentials into `NEXT_PUBLIC_*` variables.
 - Never read, print, copy, or summarize credentials or environment values.
 - Preserve unrelated dirty worktree changes.
 
