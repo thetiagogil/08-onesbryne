@@ -1,0 +1,6 @@
+-- ============================================================================
+-- Onesbryne Local Seed Entrypoint
+--
+-- Reference data required by the app is created in migrations. Keep this file
+-- for local-only seed data when the app needs deterministic demos.
+-- ============================================================================
