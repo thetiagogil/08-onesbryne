@@ -46,6 +46,11 @@ COMMENT ON COLUMN public.pieces.status IS 'Catalog lifecycle. Draft and archived
 
 ALTER TABLE public.pieces ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON TABLE public.pieces FROM anon, authenticated;
+
+REVOKE ALL ON SEQUENCE public.pieces_code_number_seq
+    FROM anon, authenticated;
+
 CREATE POLICY "Visible pieces are readable by everyone" ON public.pieces
     FOR SELECT TO anon, authenticated
     USING (status IN ('available', 'reserved', 'sold'));

@@ -15,6 +15,7 @@ database/
     demo/
   supabase/
     migrations/
+    tests/
     config.toml
     seed.sql
 ```
@@ -32,5 +33,33 @@ Generated application types live only at
 `../src/types/database.types.ts`. Run `npm run db:types` after local schema
 changes and inspect the generated diff.
 
-See [`../docs/database.md`](../docs/database.md) for commands, safety rules, and
-known verification gaps.
+## Environment Boundaries
+
+The app reads browser-safe values from the repository-root `.env.local`.
+Database wrappers explicitly load the separate repository-root `.env.database`
+for linked or remote tooling. Use the tracked example files as key inventories;
+never commit either private file or expose private values through
+`NEXT_PUBLIC_*` variables.
+
+The canonical database variable names are the generic `SUPABASE_*` names in
+`.env.database.example`. The wrapper temporarily accepts the former
+`SUPABASE_ONESBRYNE_*` names for migration compatibility, but new setup should
+use only the canonical names.
+
+## Commands And Verification
+
+Routine local work requires Docker but no linked project or remote credentials:
+
+```powershell
+npm.cmd run db:start
+npm.cmd run db:verify
+```
+
+`db:verify` resets the local database, checks SQL formatting, lints the live
+schema, runs pgTAP, and checks generated type parity. The pgTAP suite covers
+schema and grant invariants, public catalog visibility, admin catalog
+mutations, and owner isolation for profiles and favourites.
+
+`db:link`, `db:pull`, `db:push`, `db:types:linked`, and `demo:seed` are separate
+remote authorization gates. Confirm the Onesbryne target and current-task
+authorization before running any of them.

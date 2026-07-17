@@ -25,7 +25,7 @@
     "db:push:dry": "node scripts/database/supabase.mjs db push --linked --dry-run",
     "db:push": "node scripts/database/supabase.mjs db push --linked",
     "db:lint": "node scripts/database/supabase.mjs db lint --local --fail-on error",
-    "db:test": "node scripts/database/supabase.mjs test db --local",
+    "db:test": "node scripts/database/supabase.mjs test db --local supabase/tests",
     "db:types": "node scripts/database/generate-types.mjs --local",
     "db:types:check": "node scripts/database/generate-types.mjs --local --check",
     "db:types:linked": "node scripts/database/generate-types.mjs --linked",
@@ -63,7 +63,7 @@
     "eslint-config-next": "16.2.6",
     "prettier": "^3.8.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "supabase": "2.98.2",
+    "supabase": "2.105.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

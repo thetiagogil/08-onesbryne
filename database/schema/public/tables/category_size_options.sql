@@ -22,6 +22,8 @@ COMMENT ON COLUMN public.category_size_options.sort_order IS 'Display order for 
 
 ALTER TABLE public.category_size_options ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON TABLE public.category_size_options FROM anon, authenticated;
+
 CREATE POLICY "Category size options are readable by everyone" ON public.category_size_options
     FOR SELECT TO anon, authenticated
     USING (TRUE);

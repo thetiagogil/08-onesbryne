@@ -22,6 +22,8 @@ COMMENT ON COLUMN public.profiles.app_role IS 'Application role. Only database/a
 
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON TABLE public.profiles FROM anon, authenticated;
+
 CREATE POLICY "Users can read their own profile" ON public.profiles
     FOR SELECT TO authenticated
     USING ((

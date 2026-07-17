@@ -5,12 +5,12 @@ import { databaseDir, resolveSupabaseBin } from "./context.mjs";
 import { buildDatabaseEnv } from "./env.mjs";
 
 const env = buildDatabaseEnv();
-const projectRef = env.SUPABASE_ONESBRYNE_PROJECT_REF;
+const projectRef = env.SUPABASE_PROJECT_REF;
 const supabaseBin = resolveSupabaseBin();
 
 if (!projectRef) {
   console.error(
-    "Missing SUPABASE_ONESBRYNE_PROJECT_REF in .env.database or the process environment.",
+    "Missing SUPABASE_PROJECT_REF in .env.database or the process environment.",
   );
   process.exit(1);
 }

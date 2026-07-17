@@ -17,6 +17,7 @@ const sqlTargets = [
   "database/schema",
   "database/seeds",
   "database/supabase/seed.sql",
+  "database/supabase/tests",
 ];
 const ignoredSqlFiles = new Set();
 const pgFormatOptions = ["-L"];

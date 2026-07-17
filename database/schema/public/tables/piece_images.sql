@@ -36,6 +36,8 @@ COMMENT ON COLUMN public.piece_images.byte_size IS 'Optimized upload size in byt
 
 ALTER TABLE public.piece_images ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON TABLE public.piece_images FROM anon, authenticated;
+
 CREATE POLICY "Visible piece images are readable by everyone" ON public.piece_images
     FOR SELECT TO anon, authenticated
     USING (EXISTS (

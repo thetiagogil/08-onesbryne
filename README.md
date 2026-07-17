@@ -20,6 +20,16 @@ npm.cmd run lint
 npm.cmd run build
 ```
 
+## Environment
+
+Copy `.env.local.example` to `.env.local` for the browser-safe Supabase URL and
+publishable key used by the app. Keep database-tooling credentials in the
+separate untracked `.env.database`, starting from `.env.database.example` only
+when an explicitly authorized linked or remote operation needs them.
+
+Local database start, reset, lint, tests, and type generation do not require
+private remote credentials.
+
 ## Database Workflow
 
 The authoritative schema, migrations, seed sources, Supabase configuration, and
@@ -27,9 +37,9 @@ database-specific assets live under `database/`. Generated application types
 live at `src/types/database.types.ts`; there is no second generated copy under
 `database/`.
 
-Start with [`docs/database.md`](docs/database.md) for commands and safety rules,
-[`database/README.md`](database/README.md) for the source layout, and
-[`AGENTS.md`](AGENTS.md) before making database changes.
+Start with [`database/README.md`](database/README.md) for the source layout,
+commands, and safety rules, and [`AGENTS.md`](AGENTS.md) before making database
+changes.
 
 Local database verification requires Docker Desktop or another compatible
 Docker runtime:

@@ -15,6 +15,8 @@ COMMENT ON COLUMN public.favourites.user_id IS 'Favourite owner. Matches auth.ui
 
 ALTER TABLE public.favourites ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON TABLE public.favourites FROM anon, authenticated;
+
 CREATE POLICY "Users can read their own favourites" ON public.favourites
     FOR SELECT TO authenticated
     USING ((

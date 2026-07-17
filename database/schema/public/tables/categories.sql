@@ -21,6 +21,8 @@ COMMENT ON COLUMN public.categories.sort_order IS 'Admin-controlled display orde
 
 ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON TABLE public.categories FROM anon, authenticated;
+
 CREATE POLICY "Active categories are readable by everyone" ON public.categories
     FOR SELECT TO anon, authenticated
     USING (is_active);

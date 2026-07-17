@@ -6,11 +6,10 @@ environment, and authorization boundary before changing or running anything.
 
 ## Read By Scope
 
-- Read `docs/database.md`, `database/README.md`, and nearby SQL before database
-  work.
+- Read `database/README.md` and nearby SQL before database work.
 - Inspect `scripts/database/supabase.mjs` before relying on wrapper behavior.
-- Read `docs/decisions/0001-colocate-database-source.md` for migration
-  provenance.
+- Inspect the root `README.md` and `package.json` scripts for onboarding and
+  verification commands.
 
 ## Database Rules
 
@@ -26,6 +25,9 @@ environment, and authorization boundary before changing or running anything.
 - Generate the app contract directly into
   `src/types/database.types.ts`; do not keep a second generated copy under
   `database/`.
+- Keep browser-safe application values in `.env.local` and private database
+  tooling values in `.env.database`. Start from the corresponding tracked
+  example and do not move private credentials into `NEXT_PUBLIC_*` variables.
 - Never read, print, copy, or summarize credentials or environment values.
 - Preserve unrelated dirty worktree changes.
 
@@ -40,6 +42,5 @@ npm.cmd run lint
 npm.cmd run build
 ```
 
-The database test command is wired but currently has no substantive pgTAP/RLS
-suite. Report that limitation instead of treating an empty test run as complete
-authorization coverage.
+The pgTAP suite covers schema and grant invariants, public catalog visibility,
+admin catalog mutations, and owner isolation for profiles and favourites.
