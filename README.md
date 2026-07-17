@@ -27,6 +27,12 @@ publishable key used by the app. Keep database-tooling credentials in the
 separate untracked `.env.database`, starting from `.env.database.example` only
 when an explicitly authorized linked or remote operation needs them.
 
+The app accepts only `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Private tooling uses
+`SUPABASE_PROJECT_REF`, `SUPABASE_DB_PASSWORD`, and `SUPABASE_SECRET_KEY`.
+`SUPABASE_ACCESS_TOKEN` is optional when the CLI is already authenticated with
+`supabase login`.
+
 Local database start, reset, lint, tests, and type generation do not require
 private remote credentials.
 

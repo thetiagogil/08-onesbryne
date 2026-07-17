@@ -29,6 +29,9 @@ environment, and authorization boundary before changing or running anything.
   tooling values in `.env.database`. Start from the corresponding tracked
   example, use only its generic `SUPABASE_*` names, and do not move private
   credentials into `NEXT_PUBLIC_*` variables.
+- The app accepts only `NEXT_PUBLIC_SUPABASE_URL` and
+  `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`; do not restore legacy anon-key
+  aliases. Database tooling accepts only the names in `.env.database.example`.
 - Never read, print, copy, or summarize credentials or environment values.
 - Preserve unrelated dirty worktree changes.
 

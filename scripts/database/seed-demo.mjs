@@ -91,18 +91,12 @@ function readCatalog() {
 }
 
 function getProjectUrl(env) {
-  const projectUrl = env.SUPABASE_PROJECT_URL;
-
-  if (projectUrl) {
-    return projectUrl.replace(/\/$/, "");
-  }
-
   const projectRef = requiredEnv(env, "SUPABASE_PROJECT_REF");
   return `https://${projectRef}.supabase.co`;
 }
 
 function getStorageApiKey(env) {
-  return env.SUPABASE_LEGACY_SERVICE_ROLE_KEY || env.SUPABASE_SECRET_KEY;
+  return env.SUPABASE_SECRET_KEY;
 }
 
 function getStorageHeaders(apiKey) {
@@ -297,7 +291,7 @@ async function main() {
 
   if (!storageApiKey) {
     throw new Error(
-      "Missing SUPABASE_LEGACY_SERVICE_ROLE_KEY or SUPABASE_SECRET_KEY in .env.database or the process environment.",
+      "Missing SUPABASE_SECRET_KEY in .env.database or the process environment.",
     );
   }
 

@@ -42,7 +42,16 @@ never commit either private file or expose private values through
 `NEXT_PUBLIC_*` variables.
 
 The only accepted database variable names are the generic `SUPABASE_*` names
-listed in `.env.database.example`.
+listed in `.env.database.example`:
+
+- `SUPABASE_PROJECT_REF` for linking and the remote demo uploader;
+- `SUPABASE_DB_PASSWORD` for non-interactive linked database commands;
+- `SUPABASE_SECRET_KEY` for the explicitly authorized Storage demo upload;
+- optional `SUPABASE_ACCESS_TOKEN` when the CLI is not already authenticated.
+
+The app accepts only `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Legacy anon and service-role aliases are
+not supported.
 
 ## Commands And Verification
 
